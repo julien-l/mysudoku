@@ -14,6 +14,7 @@
 		F93D46AC1ACA640400B914BF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F93D46AB1ACA640400B914BF /* Images.xcassets */; };
 		F93D46AF1ACA640400B914BF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F93D46AD1ACA640400B914BF /* LaunchScreen.xib */; };
 		F93D46BB1ACA640500B914BF /* MySudokuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F93D46BA1ACA640500B914BF /* MySudokuTests.m */; };
+		F9B0A8061ACA7ADD00E20F67 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9B0A8051ACA7ADD00E20F67 /* iAd.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		F93D46B41ACA640500B914BF /* MySudokuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MySudokuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F93D46B91ACA640500B914BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F93D46BA1ACA640500B914BF /* MySudokuTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MySudokuTests.m; sourceTree = "<group>"; };
+		F9B0A8051ACA7ADD00E20F67 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9B0A8061ACA7ADD00E20F67 /* iAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +66,7 @@
 		F93D46921ACA640400B914BF = {
 			isa = PBXGroup;
 			children = (
+				F9B0A8051ACA7ADD00E20F67 /* iAd.framework */,
 				F93D469D1ACA640400B914BF /* MySudoku */,
 				F93D46B71ACA640500B914BF /* MySudokuTests */,
 				F93D469C1ACA640400B914BF /* Products */,
@@ -414,6 +418,7 @@
 				F93D46C01ACA640500B914BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F93D46C11ACA640500B914BF /* Build configuration list for PBXNativeTarget "MySudokuTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +427,7 @@
 				F93D46C31ACA640500B914BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
