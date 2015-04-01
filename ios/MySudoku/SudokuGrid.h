@@ -10,7 +10,7 @@
 
 @interface SudokuGrid : UIView
 
-@property (readonly) uint regionBorderWidth;   //!< Size of the borders between the regions
 @property (readonly) uint cellBorderWidth;     //!< Size of the borders between cells in the same region
+@property (readonly) UIColor * cellBorderColor;
 
 @end

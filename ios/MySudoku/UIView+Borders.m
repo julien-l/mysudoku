@@ -11,50 +11,56 @@
 
 @implementation UIView (Borders)
 
-- (id) borderRight: (float) width
+- (id) borderShadow: (float)width opacity:(float)opacity
+{
+    self.layer.masksToBounds = NO;
+    //layer.cornerRadius = 8; // if you like rounded corners
+    self.layer.shadowOffset = CGSizeMake(-1,0);
+    self.layer.shadowRadius = 0.5;
+    self.layer.shadowOpacity = opacity;
+    return self;
+}
+
+- (id) borderRight: (float)width color:(UIColor*)color
 {
     CALayer * layer = [self layer];
     CALayer * b = [CALayer layer];
-    b.borderColor = [UIColor darkGrayColor].CGColor;
+    b.borderColor = color.CGColor;
     b.borderWidth = width;
     b.frame = CGRectMake(CGRectGetWidth(layer.frame)-width, 0, width, CGRectGetHeight(layer.frame));
-    [b setBorderColor:[UIColor blackColor].CGColor];
     [layer addSublayer:b];
     return self;
 }
 
-- (id) borderLeft: (float) width
+- (id) borderLeft: (float)width color:(UIColor*)color
 {
     CALayer * layer = [self layer];
     CALayer * b = [CALayer layer];
-    b.borderColor = [UIColor darkGrayColor].CGColor;
+    b.borderColor = color.CGColor;
     b.borderWidth = width;
     b.frame = CGRectMake(0, 0, width, CGRectGetHeight(layer.frame));
-    [b setBorderColor:[UIColor blackColor].CGColor];
     [layer addSublayer:b];
     return self;
 }
 
-- (id) borderBottom: (float) width
+- (id) borderBottom: (float)width color:(UIColor*)color
 {
     CALayer * layer = [self layer];
     CALayer * b = [CALayer layer];
-    b.borderColor = [UIColor darkGrayColor].CGColor;
+    b.borderColor = color.CGColor;
     b.borderWidth = width;
     b.frame = CGRectMake(0, CGRectGetHeight(layer.frame)-width, CGRectGetWidth(layer.frame), width);
-    [b setBorderColor:[UIColor blackColor].CGColor];
     [layer addSublayer:b];
     return self;
 }
 
-- (id) borderTop: (float) width
+- (id) borderTop: (float)width color:(UIColor*)color
 {
     CALayer * layer = [self layer];
     CALayer * b = [CALayer layer];
-    b.borderColor = [UIColor darkGrayColor].CGColor;
+    b.borderColor = color.CGColor;
     b.borderWidth = width;
     b.frame = CGRectMake(0, 0, CGRectGetWidth(layer.frame), width);
-    [b setBorderColor:[UIColor blackColor].CGColor];
     [layer addSublayer:b];
     return self;
 }

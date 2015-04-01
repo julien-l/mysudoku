@@ -22,13 +22,11 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxk-sA-NgS" userLabel="Grid View" customClass="SudokuGrid">
                                         <rect key="frame" x="0.0" y="0.0" width="446" height="446"/>
-                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="hxk-sA-NgS" secondAttribute="height" multiplier="1:1" id="TPV-o4-mWL"/>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="hxk-sA-NgS" firstAttribute="top" secondItem="wj9-cz-Vxf" secondAttribute="top" id="8xa-Hq-AJw"/>
                                     <constraint firstItem="hxk-sA-NgS" firstAttribute="height" secondItem="wj9-cz-Vxf" secondAttribute="height" priority="750" id="H3b-Mr-u6r"/>
@@ -57,7 +55,6 @@
                                         </state>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="T7B-hL-Ned" secondAttribute="bottom" constant="8" id="J6a-42-mEc"/>
                                     <constraint firstItem="CQZ-aY-3vw" firstAttribute="leading" secondItem="7Ot-Qy-lab" secondAttribute="leading" constant="8" id="N4i-8o-vVD"/>

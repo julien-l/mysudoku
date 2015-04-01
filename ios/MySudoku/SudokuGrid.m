@@ -15,6 +15,7 @@
 @implementation SudokuGrid
 
 int m_cellWidthList[NCOL] = {0,0,0, 0,0,0, 0,0,0};
+
 UILabel * m_labelArray[NROW*NCOL];
 
 - (UILabel*)labelAt:(uint)row and:(uint)col
@@ -33,7 +34,7 @@ UILabel * m_labelArray[NROW*NCOL];
 {
     // Set default properties values
     _cellBorderWidth = 1;
-    _regionBorderWidth = 2;
+    _cellBorderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.25f];
 
     // Add the labels
     for (uint row = 0; row < NROW; ++row)
@@ -43,6 +44,7 @@ UILabel * m_labelArray[NROW*NCOL];
             UILabel * label = [UILabel new];
             [label setText:[NSString stringWithFormat:@"%i%i",row,col]];
             [label setTextAlignment:NSTextAlignmentCenter];
+            [label setTextColor:[UIColor darkGrayColor]];
             [self addSubview:label];
             [self storeLabelPointerAt:row and:col pointer:label];
         }
@@ -75,7 +77,6 @@ UILabel * m_labelArray[NROW*NCOL];
 
     // Compute the layout for the 9x9 grid
     const CGRect rect = [self frame];
-    NSLog(@"Size: %@, region border width = %i", NSStringFromCGSize(rect.size), _regionBorderWidth);
     const uint usableWidth = ((uint)rect.size.width);
     const uint cellWidth = (uint) floorf(usableWidth / NCOL);
     NSLog(@"Width for cells = %i, column width = %i", usableWidth, cellWidth);
@@ -107,14 +108,15 @@ UILabel * m_labelArray[NROW*NCOL];
             CGRect rect = CGRectMake(dx, dy, m_cellWidthList[col], cellHeigth);
             UILabel * label = [self labelAt:row and:col];
             [label setFrame:rect];
+            //[label borderShadow:2 opacity:0.2f];
             if (col != NCOL-1)
-                [label borderRight:_cellBorderWidth];
+                [label borderRight:_cellBorderWidth color:_cellBorderColor];
             if (col > 0 && 0 == col%3)
-                [label borderLeft:_regionBorderWidth];
+                [label borderLeft:_cellBorderWidth color:_cellBorderColor];
             if (row != NROW-1)
-                [label borderBottom:_cellBorderWidth];
+                [label borderBottom:_cellBorderWidth color:_cellBorderColor];
             if (row > 0 && 0 == row%3)
-                [label borderTop:_regionBorderWidth];
+                [label borderTop:_cellBorderWidth color:_cellBorderColor];
             dx += m_cellWidthList[col];
         }
         dy += cellHeigth;
