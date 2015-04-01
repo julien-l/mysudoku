@@ -20,7 +20,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wj9-cz-Vxf" userLabel="Grid View Parent">
                                 <rect key="frame" x="0.0" y="20" width="600" height="446"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxk-sA-NgS" userLabel="Grid View">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxk-sA-NgS" userLabel="Grid View" customClass="SudokuGrid">
                                         <rect key="frame" x="0.0" y="0.0" width="446" height="446"/>
                                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
