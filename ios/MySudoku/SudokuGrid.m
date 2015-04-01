@@ -15,7 +15,6 @@
 @implementation SudokuGrid
 
 int m_cellWidthList[NCOL] = {0,0,0, 0,0,0, 0,0,0};
-
 UILabel * m_labelArray[NROW*NCOL];
 
 - (UILabel*)labelAt:(uint)row and:(uint)col
@@ -42,7 +41,6 @@ UILabel * m_labelArray[NROW*NCOL];
         for (uint col = 0; col < NCOL; ++col)
         {
             UILabel * label = [UILabel new];
-            [label setText:[NSString stringWithFormat:@"%i%i",row,col]];
             [label setTextAlignment:NSTextAlignmentCenter];
             [label setTextColor:[UIColor darkGrayColor]];
             [self addSubview:label];
@@ -120,6 +118,24 @@ UILabel * m_labelArray[NROW*NCOL];
             dx += m_cellWidthList[col];
         }
         dy += cellHeigth;
+    }
+}
+
+- (void)updateContent
+{
+    if (nil == _delegate)
+    {
+        NSLog(@"Cannot update grid content, no delegate is set");
+        return;
+    }
+
+    for (uint row = 0; row < NROW; ++row)
+    {
+        for (uint col = 0; col < NCOL; ++col)
+        {
+            UILabel * label = [self labelAt:row and:col];
+            [label setText:[_delegate cellContentAt:row andCol:col]];
+        }
     }
 }
 

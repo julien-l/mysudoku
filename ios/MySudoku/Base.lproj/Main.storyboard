@@ -80,6 +80,9 @@
                             <constraint firstItem="7Ot-Qy-lab" firstAttribute="top" relation="lessThanOrEqual" secondItem="wj9-cz-Vxf" secondAttribute="bottom" constant="8" id="rOM-Bh-3mI"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="theGrid" destination="hxk-sA-NgS" id="Jb5-sI-ZoG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

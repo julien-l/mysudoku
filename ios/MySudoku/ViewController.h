@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SudokuDataSource.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <SudokuDataSource>
 
 
 @end

@@ -7,8 +7,10 @@
 //
 
 #import "ViewController.h"
+#import "SudokuGrid.h"
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet SudokuGrid *theGrid;
 
 @end
 
@@ -17,11 +19,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    _theGrid.delegate = self;
+    [_theGrid updateContent];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSString*) cellContentAt:(uint)row andCol:(uint)col {
+    return [NSString stringWithFormat:@"%i%i",row,col];
 }
 
 @end
