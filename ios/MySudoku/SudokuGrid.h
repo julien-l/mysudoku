@@ -11,9 +11,6 @@
 
 @interface SudokuGrid : UIView
 
-@property (readonly) uint cellBorderWidth;     //!< Size of the borders between cells in the same region
-@property (readonly) UIColor * cellBorderColor;
-
 // Delegate properties should always be weak references
 // See http://stackoverflow.com/a/4796131/263871 for the rationale
 // (Tip: If you're not using ARC, use `assign` instead of `weak`)

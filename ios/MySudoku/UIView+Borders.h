@@ -9,9 +9,9 @@
 #import <UIKit/UIView.h>
 
 @interface UIView (Borders)
-- (id) borderShadow: (float)width opacity:(float)opacity;
-- (id) borderRight: (float)width color:(UIColor*)color;
-- (id) borderLeft: (float)width color:(UIColor*)color;
-- (id) borderBottom: (float)width color:(UIColor*)color;
-- (id) borderTop: (float)width color:(UIColor*)color;
+- (void) borderShadow: (float)width opacity:(float)opacity;
+- (void) borderRight: (float)width color:(UIColor*)color;
+- (void) borderLeft: (float)width color:(UIColor*)color;
+- (void) borderBottom: (float)width color:(UIColor*)color;
+- (void) borderTop: (float)width color:(UIColor*)color;
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "SudokuGrid.h"
-#import "UIView+Borders.h"
+#import "SudokuCell.h"
 
 #define NROW 9
 #define NCOL 9
@@ -15,36 +15,30 @@
 @implementation SudokuGrid
 
 int m_cellWidthList[NCOL] = {0,0,0, 0,0,0, 0,0,0};
-UILabel * m_labelArray[NROW*NCOL];
+SudokuCell * m_labelArray[NROW*NCOL];
 
-- (UILabel*)labelAt:(uint)row and:(uint)col
+- (SudokuCell*)labelAt:(uint)row and:(uint)col
 {
     assert(row < NROW && col < NCOL);
     return m_labelArray[row*NCOL + col];
 }
 
-- (void)storeLabelPointerAt:(uint)row and:(uint)col pointer:(UILabel*)label
+- (void)storeCellPointerAt:(uint)row and:(uint)col pointer:(SudokuCell*)cell
 {
     assert(row < NROW && col < NCOL);
-    m_labelArray[row*NCOL + col] = label;
+    m_labelArray[row*NCOL + col] = cell;
 }
 
 - (void)initHelper
 {
-    // Set default properties values
-    _cellBorderWidth = 1;
-    _cellBorderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.25f];
-
     // Add the labels
     for (uint row = 0; row < NROW; ++row)
     {
         for (uint col = 0; col < NCOL; ++col)
         {
-            UILabel * label = [UILabel new];
-            [label setTextAlignment:NSTextAlignmentCenter];
-            [label setTextColor:[UIColor darkGrayColor]];
-            [self addSubview:label];
-            [self storeLabelPointerAt:row and:col pointer:label];
+            SudokuCell * cell = [SudokuCell new];
+            [self addSubview:cell];
+            [self storeCellPointerAt:row and:col pointer:cell];
         }
     }
 }
@@ -104,17 +98,16 @@ UILabel * m_labelArray[NROW*NCOL];
         for (uint col = 0; col < NCOL; ++col)
         {
             CGRect rect = CGRectMake(dx, dy, m_cellWidthList[col], cellHeigth);
-            UILabel * label = [self labelAt:row and:col];
-            [label setFrame:rect];
-            //[label borderShadow:2 opacity:0.2f];
+            SudokuCell * cell = [self labelAt:row and:col];
+            [cell setFrame:rect];
             if (col != NCOL-1)
-                [label borderRight:_cellBorderWidth color:_cellBorderColor];
+                [cell addBorderRight];
             if (col > 0 && 0 == col%3)
-                [label borderLeft:_cellBorderWidth color:_cellBorderColor];
+                [cell addBorderLeft];
             if (row != NROW-1)
-                [label borderBottom:_cellBorderWidth color:_cellBorderColor];
+                [cell addBorderBottom];
             if (row > 0 && 0 == row%3)
-                [label borderTop:_cellBorderWidth color:_cellBorderColor];
+                [cell addBorderTop];
             dx += m_cellWidthList[col];
         }
         dy += cellHeigth;
@@ -133,8 +126,8 @@ UILabel * m_labelArray[NROW*NCOL];
     {
         for (uint col = 0; col < NCOL; ++col)
         {
-            UILabel * label = [self labelAt:row and:col];
-            [label setText:[_delegate cellContentAt:row andCol:col]];
+            SudokuCell * cell = [self labelAt:row and:col];
+            [cell setSingleNumber:[_delegate cellContentAt:row andCol:col]];
         }
     }
 }
