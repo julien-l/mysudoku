@@ -15,6 +15,7 @@
 		F93D46AF1ACA640400B914BF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F93D46AD1ACA640400B914BF /* LaunchScreen.xib */; };
 		F93D46BB1ACA640500B914BF /* MySudokuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F93D46BA1ACA640500B914BF /* MySudokuTests.m */; };
 		F971BE831ACD1AA800BA932B /* SudokuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F971BE821ACD1AA800BA932B /* SudokuCell.m */; };
+		F971BE861ACD1B6800BA932B /* SudokuCellContent.m in Sources */ = {isa = PBXBuildFile; fileRef = F971BE851ACD1B6800BA932B /* SudokuCellContent.m */; };
 		F9B0A8061ACA7ADD00E20F67 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9B0A8051ACA7ADD00E20F67 /* iAd.framework */; };
 		F9CBD6981ACBC1D600D588BF /* SudokuGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CBD6951ACBC1D600D588BF /* SudokuGrid.m */; };
 		F9CBD6991ACBC1D600D588BF /* UIView+Borders.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CBD6971ACBC1D600D588BF /* UIView+Borders.m */; };
@@ -47,6 +48,8 @@
 		F971BE801ACD181000BA932B /* SudokuDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudokuDataSource.h; sourceTree = "<group>"; };
 		F971BE811ACD1AA800BA932B /* SudokuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudokuCell.h; sourceTree = "<group>"; };
 		F971BE821ACD1AA800BA932B /* SudokuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudokuCell.m; sourceTree = "<group>"; };
+		F971BE841ACD1B6800BA932B /* SudokuCellContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudokuCellContent.h; sourceTree = "<group>"; };
+		F971BE851ACD1B6800BA932B /* SudokuCellContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudokuCellContent.m; sourceTree = "<group>"; };
 		F9B0A8051ACA7ADD00E20F67 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		F9CBD6941ACBC1D600D588BF /* SudokuGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudokuGrid.h; sourceTree = "<group>"; };
 		F9CBD6951ACBC1D600D588BF /* SudokuGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudokuGrid.m; sourceTree = "<group>"; };
@@ -95,6 +98,8 @@
 		F93D469D1ACA640400B914BF /* MySudoku */ = {
 			isa = PBXGroup;
 			children = (
+				F971BE841ACD1B6800BA932B /* SudokuCellContent.h */,
+				F971BE851ACD1B6800BA932B /* SudokuCellContent.m */,
 				F971BE811ACD1AA800BA932B /* SudokuCell.h */,
 				F971BE821ACD1AA800BA932B /* SudokuCell.m */,
 				F971BE801ACD181000BA932B /* SudokuDataSource.h */,
@@ -243,6 +248,7 @@
 				F93D46A71ACA640400B914BF /* ViewController.m in Sources */,
 				F9CBD6991ACBC1D600D588BF /* UIView+Borders.m in Sources */,
 				F971BE831ACD1AA800BA932B /* SudokuCell.m in Sources */,
+				F971BE861ACD1B6800BA932B /* SudokuCellContent.m in Sources */,
 				F93D46A41ACA640400B914BF /* AppDelegate.m in Sources */,
 				F9CBD6981ACBC1D600D588BF /* SudokuGrid.m in Sources */,
 				F93D46A11ACA640400B914BF /* main.m in Sources */,

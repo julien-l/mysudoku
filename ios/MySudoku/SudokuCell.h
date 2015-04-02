@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIControl.h>
+#import "SudokuCellContent.h"
 
 @interface SudokuCell : UIControl
 
 @property uint cellBorderWidth;         //!< Size of the borders between cells in the same region
 @property UIColor * cellBorderColor;    //!< Color of the borders
 @property UIColor * textColor;          //!< Color for the text
+@property UIColor * cellInitialBackgroundColor;     //!< Color of the background of "initial" cells
 
-- (void)setSingleNumber:(NSString*)number;
+- (void)setContent:(SudokuCellContent*)cellContent;
 
 - (void)addBorderRight;
 - (void)addBorderLeft;

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SudokuCellContent.h"
 
 //! \brief The protocol for the Sudoku grid delegate
 //!
@@ -38,6 +39,6 @@
 //
 //- (BOOL) cellAt:(uint)regionIndex andCellIndex:(uint)cellIndex hasType:(enum SudokuCellType) type;
 
-- (NSString*) cellContentAt:(uint)row andCol:(uint)col;
+- (SudokuCellContent*)cellContentAt:(uint)row andCol:(uint)col;
 
 @end

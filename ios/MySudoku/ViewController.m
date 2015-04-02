@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "SudokuGrid.h"
+#import "SudokuCellContent.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet SudokuGrid *theGrid;
@@ -28,8 +29,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (NSString*) cellContentAt:(uint)row andCol:(uint)col {
-    return [NSString stringWithFormat:@"%i%i",row,col];
+- (SudokuCellContent*)cellContentAt:(uint)row andCol:(uint)col {
+    SudokuCellContent * cellContent = [SudokuCellContent new];
+    if (row != col) {
+        cellContent.type = TYPE_EMPTY;
+    } else {
+        cellContent.type = TYPE_INITIAL;
+    }
+    cellContent.content = [NSString stringWithFormat:@"%i%i",row,col];
+    return cellContent;
 }
 
 @end

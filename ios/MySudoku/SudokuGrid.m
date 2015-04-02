@@ -127,7 +127,7 @@ SudokuCell * m_labelArray[NROW*NCOL];
         for (uint col = 0; col < NCOL; ++col)
         {
             SudokuCell * cell = [self labelAt:row and:col];
-            [cell setSingleNumber:[_delegate cellContentAt:row andCol:col]];
+            [cell setContent:[_delegate cellContentAt:row andCol:col]];
         }
     }
 }

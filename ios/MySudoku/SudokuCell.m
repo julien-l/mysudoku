@@ -12,7 +12,7 @@
 
 @interface SudokuCell ()
 
-@property UILabel * label;
+    @property UILabel * label;
 
 @end
 
@@ -26,6 +26,7 @@
         _cellBorderWidth = 1;
         _cellBorderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.25f];
         _textColor = [UIColor darkGrayColor];
+        _cellInitialBackgroundColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.25f];
         // Configure the label
         _label = [UILabel new];
         [_label setTextAlignment:NSTextAlignmentCenter];
@@ -36,8 +37,17 @@
     return self;
 }
 
-- (void)setSingleNumber:(NSString*)number {
-    [_label setText:number];
+- (void)setContent:(SudokuCellContent*)cellContent
+{
+    [_label setText:[cellContent content]];
+    if (TYPE_INITIAL == cellContent.type)
+    {
+        [_label setBackgroundColor:_cellInitialBackgroundColor];
+    }
+    else
+    {
+        [_label setBackgroundColor:[UIColor whiteColor]];
+    }
 }
 
 - (void)addBorderRight
