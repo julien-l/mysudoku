@@ -13,33 +13,25 @@
 #define NCOL 9
 
 @implementation SudokuGrid
+{
+    int m_cellWidthList [NCOL];
+    SudokuCell * m_labelArray[NROW*NCOL];
+}
 
-int m_cellWidthList[NCOL] = {0,0,0, 0,0,0, 0,0,0};
-SudokuCell * m_labelArray[NROW*NCOL];
-
-- (SudokuCell*)labelAt:(uint)row and:(uint)col
+- (SudokuCell*)cellAt:(uint)row and:(uint)col
 {
     assert(row < NROW && col < NCOL);
     return m_labelArray[row*NCOL + col];
 }
 
-- (void)storeCellPointerAt:(uint)row and:(uint)col pointer:(SudokuCell*)cell
-{
-    assert(row < NROW && col < NCOL);
-    m_labelArray[row*NCOL + col] = cell;
-}
-
 - (void)initHelper
 {
-    // Add the labels
-    for (uint row = 0; row < NROW; ++row)
+    memset(m_cellWidthList, 0, sizeof(m_cellWidthList));
+    for (uint i = 0; i < NROW*NCOL; ++i)
     {
-        for (uint col = 0; col < NCOL; ++col)
-        {
-            SudokuCell * cell = [SudokuCell new];
-            [self addSubview:cell];
-            [self storeCellPointerAt:row and:col pointer:cell];
-        }
+        SudokuCell * cell = [SudokuCell new];
+        m_labelArray[i] = cell;
+        [self addSubview:cell];
     }
 }
 
@@ -63,6 +55,8 @@ SudokuCell * m_labelArray[NROW*NCOL];
     return self;
 }
 
+//! \note The layout algorithm assumes the display area is a square.
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -71,7 +65,6 @@ SudokuCell * m_labelArray[NROW*NCOL];
     const CGRect rect = [self frame];
     const uint usableWidth = ((uint)rect.size.width);
     const uint cellWidth = (uint) floorf(usableWidth / NCOL);
-    NSLog(@"Width for cells = %i, column width = %i", usableWidth, cellWidth);
     for (uint i = 0; i < NCOL; ++i)
     {
         m_cellWidthList[i] = cellWidth;
@@ -84,10 +77,6 @@ SudokuCell * m_labelArray[NROW*NCOL];
     {
         m_cellWidthList[i] += 1;
     }
-    for (uint i = 0; i < NCOL; ++i)
-    {
-        NSLog(@"%i, ", m_cellWidthList[i]);
-    }
     // Apply to the labels
     uint dx = 0;
     uint dy = 0;
@@ -98,7 +87,7 @@ SudokuCell * m_labelArray[NROW*NCOL];
         for (uint col = 0; col < NCOL; ++col)
         {
             CGRect rect = CGRectMake(dx, dy, m_cellWidthList[col], cellHeigth);
-            SudokuCell * cell = [self labelAt:row and:col];
+            SudokuCell * cell = [self cellAt:row and:col];
             [cell setFrame:rect];
             if (col != NCOL-1)
                 [cell addBorderRight];
@@ -121,23 +110,14 @@ SudokuCell * m_labelArray[NROW*NCOL];
         NSLog(@"Cannot update grid content, no delegate is set");
         return;
     }
-
     for (uint row = 0; row < NROW; ++row)
     {
         for (uint col = 0; col < NCOL; ++col)
         {
-            SudokuCell * cell = [self labelAt:row and:col];
+            SudokuCell * cell = [self cellAt:row and:col];
             [cell setContent:[_delegate cellContentAt:row andCol:col]];
         }
     }
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end
