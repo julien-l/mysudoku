@@ -72,7 +72,6 @@
     // Then spread the extra space on the first columns
     const int extraSpace = usableWidth % NCOL;
     assert(extraSpace < NCOL);
-    NSLog(@"Extra space = %i", extraSpace);
     for (uint i = 0; i < extraSpace; ++i)
     {
         m_cellWidthList[i] += 1;

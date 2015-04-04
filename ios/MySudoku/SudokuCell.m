@@ -39,15 +39,28 @@
 
 - (void)setContent:(SudokuCellContent*)cellContent
 {
-    [_label setText:[cellContent content]];
-    if (TYPE_INITIAL == cellContent.type)
+    [_label setText:[NSString stringWithFormat:@"%d", cellContent->value]];
+    switch (cellContent->type)
     {
-        [_label setBackgroundColor:_cellInitialBackgroundColor];
+        case CELL_TYPE_INITIAL:
+            [_label setBackgroundColor:_cellInitialBackgroundColor];
+            break;
+        default:
+            [_label setBackgroundColor:[UIColor whiteColor]];
+            break;
     }
-    else
+    switch (cellContent->state)
     {
-        [_label setBackgroundColor:[UIColor whiteColor]];
-    }
+        case CELL_STATE_SELECTED:
+            [_label setBackgroundColor:[UIColor blueColor]];
+            break;
+        case CELL_STATE_PEER:
+            [_label setBackgroundColor:[[UIColor blueColor] colorWithAlphaComponent:0.25f]];
+            break;
+        default:
+            // Do nothing, leave the cells as-is
+            break;
+        }
 }
 
 - (void)addBorderRight

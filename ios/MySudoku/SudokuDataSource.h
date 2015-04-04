@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SudokuCellContent.h"
+#include "SudokuData.h"
 
 //! \brief The protocol for the Sudoku grid delegate
 //!

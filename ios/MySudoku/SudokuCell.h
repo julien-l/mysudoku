@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIControl.h>
-#import "SudokuCellContent.h"
+#include "SudokuData.h"
 
 @interface SudokuCell : UIControl
 

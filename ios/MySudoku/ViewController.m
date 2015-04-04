@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "SudokuGrid.h"
-#import "SudokuCellContent.h"
+#include "Sudoku.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet SudokuGrid *theGrid;
@@ -16,11 +16,19 @@
 @end
 
 @implementation ViewController
+{
+    SudokuPuzzle *thePuzzle;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    _theGrid.delegate = self;
+    NSLog(@"viewDidLoad()");
+    if (nil == thePuzzle) {
+        thePuzzle = SudokuAllocPuzzle();
+        SudokuGeneratePuzzle(thePuzzle);
+    }
+    [_theGrid setDelegate: self];
     [_theGrid updateContent];
 }
 
@@ -30,14 +38,13 @@
 }
 
 - (SudokuCellContent*)cellContentAt:(uint)row andCol:(uint)col {
-    SudokuCellContent * cellContent = [SudokuCellContent new];
-    if (row != col) {
-        cellContent.type = TYPE_EMPTY;
-    } else {
-        cellContent.type = TYPE_INITIAL;
-    }
-    cellContent.content = [NSString stringWithFormat:@"%i%i",row,col];
-    return cellContent;
+    return SudokuCellContentAt(thePuzzle, row, col);
+}
+
+- (void)dealloc {
+    NSLog(@"dealloc()");
+    SudokuDeallocPuzzle(thePuzzle);
+    thePuzzle = NULL;
 }
 
 @end
