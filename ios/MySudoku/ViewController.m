@@ -12,6 +12,7 @@
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet SudokuGrid *theGrid;
+@property (weak, nonatomic) IBOutlet UIButton *theGenerateButton;
 
 @end
 
@@ -45,6 +46,11 @@
     NSLog(@"dealloc()");
     SudokuDeallocPuzzle(thePuzzle);
     thePuzzle = NULL;
+}
+- (IBAction)onGenerateButtonClicked:(id)sender {
+    assert(nil != thePuzzle);
+    SudokuGeneratePuzzle(thePuzzle);
+    [_theGrid updateContent];
 }
 
 @end

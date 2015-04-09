@@ -42,11 +42,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ot-Qy-lab" userLabel="Button View">
                                 <rect key="frame" x="0.0" y="466" width="600" height="84"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQZ-aY-3vw">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQZ-aY-3vw">
                                         <rect key="frame" x="8" y="8" width="46" height="30"/>
-                                        <state key="normal" title="Button">
+                                        <state key="normal" title="Nouveau">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="onGenerateButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4c6-Sp-4yU"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T7B-hL-Ned">
                                         <rect key="frame" x="8" y="46" width="46" height="30"/>
@@ -81,6 +84,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="theGenerateButton" destination="CQZ-aY-3vw" id="fbv-PH-f03"/>
                         <outlet property="theGrid" destination="hxk-sA-NgS" id="Jb5-sI-ZoG"/>
                     </connections>
                 </viewController>

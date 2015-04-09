@@ -117,6 +117,7 @@
             [cell setContent:[_delegate cellContentAt:row andCol:col]];
         }
     }
+    [self setNeedsDisplay];
 }
 
 @end
