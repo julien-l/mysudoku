@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
+#include <stdio.h>
+#include <stdbool.h>
 
 #include "SudokuAlgorithms.h"
 #include "SudokuData.h"
@@ -63,4 +65,26 @@ void SudokuGeneratePuzzle(SudokuPuzzle *puzzle)
         }
         puzzle->board[i].state = CELL_STATE_NONE;
     }
+}
+
+/**
+ Save the puzzle to the given text file compatible with http://www.sudoku-solutions.com/
+ All numbers are saved in one line, without space.
+ */
+bool SudokuSaveToFile(SudokuPuzzle *puzzle, const char *filename)
+{
+    assert(NULL != puzzle && "SudokuSaveToFile(): Bad input");
+    printf("Saving solution to file '%s'\n", filename);
+    FILE *f = fopen(filename, "w");
+    if (NULL == f)
+    {
+        perror("SudokuSaveToFile(): Can't open file");
+        return false;
+    }
+    for (uint i = 0; i < NROWS*NCOLS; ++i)
+    {
+        fprintf(f, "%d", puzzle->board[i].value);
+    }
+    fclose(f);
+    return true;
 }

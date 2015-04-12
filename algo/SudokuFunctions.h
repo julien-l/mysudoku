@@ -23,6 +23,8 @@ void SudokuClearPuzzle(struct SudokuPuzzle *puzzle);
 
 struct SudokuCellContent * SudokuCellContentAt(struct SudokuPuzzle *puzzle, uint row, uint col);
 
+bool SudokuSaveToFile(struct SudokuPuzzle *puzzle, const char *filename);
+
 void SudokuGeneratePuzzle(struct SudokuPuzzle *puzzle);
 
 #endif /* defined(__MySudoku__SudokuFunctions__) */

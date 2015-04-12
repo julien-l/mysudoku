@@ -24,13 +24,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    NSLog(@"viewDidLoad()");
+    [_theGrid setDelegate: self];
     if (nil == thePuzzle) {
         thePuzzle = SudokuAllocPuzzle();
-        SudokuGeneratePuzzle(thePuzzle);
     }
-    [_theGrid setDelegate: self];
-    [_theGrid updateContent];
+    [self generateThePuzzle];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,10 +45,27 @@
     SudokuDeallocPuzzle(thePuzzle);
     thePuzzle = NULL;
 }
+
 - (IBAction)onGenerateButtonClicked:(id)sender {
+    [self generateThePuzzle];
+}
+
+- (void)generateThePuzzle {
     assert(nil != thePuzzle);
     SudokuGeneratePuzzle(thePuzzle);
     [_theGrid updateContent];
+    // Lines below are for debug
+    NSString *path = [[self applicationDocumentsDirectory].path
+                       stringByAppendingPathComponent:@"SudokuSolution.txt"];
+    SudokuSaveToFile(thePuzzle, [path UTF8String]);
+}
+
+/**
+ Returns the URL to the application's Documents directory.
+ */
+- (NSURL*)applicationDocumentsDirectory {
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory 
+         inDomains:NSUserDomainMask] lastObject];
 }
 
 @end
