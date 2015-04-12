@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    [_theGrid setDelegate: self];
+    [_theGrid setDelegate:self];
     if (nil == thePuzzle) {
         thePuzzle = SudokuAllocPuzzle();
     }
@@ -36,8 +36,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (SudokuCellContent*)cellContentAt:(uint)row andCol:(uint)col {
-    return SudokuCellContentAt(thePuzzle, row, col);
+- (SudokuCellContent*)cellContentAtIndex:(uint)index {
+    return SudokuCellContentAtIndex(thePuzzle, index);
 }
 
 - (void)dealloc {
@@ -51,7 +51,6 @@
 }
 
 - (void)generateThePuzzle {
-    assert(nil != thePuzzle);
     SudokuGeneratePuzzle(thePuzzle);
     [_theGrid updateContent];
     // Lines below are for debug

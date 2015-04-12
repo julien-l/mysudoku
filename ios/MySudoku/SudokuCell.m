@@ -60,7 +60,7 @@
         default:
             // Do nothing, leave the cells as-is
             break;
-        }
+    }
 }
 
 - (void)addBorderRight

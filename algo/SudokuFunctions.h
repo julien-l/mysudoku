@@ -21,10 +21,10 @@ void SudokuDeallocPuzzle(struct SudokuPuzzle *puzzle);
 
 void SudokuClearPuzzle(struct SudokuPuzzle *puzzle);
 
-struct SudokuCellContent * SudokuCellContentAt(struct SudokuPuzzle *puzzle, uint row, uint col);
-
-bool SudokuSaveToFile(struct SudokuPuzzle *puzzle, const char *filename);
+struct SudokuCellContent * SudokuCellContentAtIndex(struct SudokuPuzzle *puzzle, uint index);
 
 void SudokuGeneratePuzzle(struct SudokuPuzzle *puzzle);
+
+bool SudokuSaveToFile(struct SudokuPuzzle *puzzle, const char *filename);
 
 #endif /* defined(__MySudoku__SudokuFunctions__) */

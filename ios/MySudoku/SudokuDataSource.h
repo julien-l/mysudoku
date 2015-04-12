@@ -33,12 +33,6 @@
 
 @protocol SudokuDataSource <NSObject>
 
-//- (const SudokuCellContent *) cellContentAt:(uint)regionIndex andCellIndex:(uint)cellIndex;
-//
-//- (enum SudokuCellType) cellTypeAt:(uint)regionIndex andCellIndex:(uint)cellIndex;
-//
-//- (BOOL) cellAt:(uint)regionIndex andCellIndex:(uint)cellIndex hasType:(enum SudokuCellType) type;
-
-- (SudokuCellContent*)cellContentAt:(uint)row andCol:(uint)col;
+- (SudokuCellContent*)cellContentAtIndex:(uint)index;
 
 @end

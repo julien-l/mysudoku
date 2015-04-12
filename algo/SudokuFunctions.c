@@ -42,10 +42,10 @@ void SudokuClearPuzzle(SudokuPuzzle *puzzle)
     memset(puzzle->board, 0, sizeof(SudokuCellContent)*NCOLS*NROWS);
 }
 
-SudokuCellContent* SudokuCellContentAt(SudokuPuzzle *puzzle, uint row, uint col)
+SudokuCellContent * SudokuCellContentAtIndex(SudokuPuzzle *puzzle, uint index)
 {
-    assert(NULL != puzzle && row < NROWS && col < NCOLS && "SudokuCellContentAt(): Bad input");
-    return &(puzzle->board[row*NCOLS+col]);
+    assert(NULL != puzzle && index < NROWS*NCOLS && "SudokuCellContentAtIndex(): Bad input");
+    return &(puzzle->board[index]);
 }
 
 void SudokuGeneratePuzzle(SudokuPuzzle *puzzle)
