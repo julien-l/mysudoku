@@ -14,6 +14,8 @@
 // Fwd-declaration
 struct SudokuPuzzle;
 
+bool SudokuCheckNoConflict(struct SudokuPuzzle *puzzle, uint index, uint value);
+
 void SudokuGenerateSolution(struct SudokuPuzzle *puzzle);
 
 #endif /* defined(__MySudoku__SudokuAlgorithms__) */
