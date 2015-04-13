@@ -54,6 +54,7 @@ struct SudokuCellContent
     SudokuCellType type;
     SudokuCellState state;
     uint value;
+    uint index;
 };
 
 typedef struct SudokuCellContent SudokuCellContent;
@@ -65,6 +66,7 @@ typedef struct SudokuCellContent SudokuCellContent;
 struct SudokuPuzzle
 {
     SudokuCellContent *board;
+    uint selectedCellIndex;
 };
 
 typedef struct SudokuPuzzle SudokuPuzzle;

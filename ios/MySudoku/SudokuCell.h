@@ -16,6 +16,8 @@
 @property UIColor * textColor;          //!< Color for the text
 @property UIColor * cellInitialBackgroundColor;     //!< Color of the background of "initial" cells
 
+@property (nonatomic, setter=setContent:) SudokuCellContent *cellContent;
+
 - (void)setContent:(SudokuCellContent*)cellContent;
 
 - (void)addBorderRight;

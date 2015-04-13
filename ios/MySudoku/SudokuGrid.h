@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "SudokuDataSource.h"
 
+// Fwd-declaration
+@class SudokuCell;
+
 @interface SudokuGrid : UIView
 
 // Delegate properties should always be weak references
@@ -17,5 +20,7 @@
 @property (nonatomic, weak) id<SudokuDataSource> delegate;
 
 - (void)updateContent;
+
+- (IBAction)buttonTapped:(SudokuCell*)sender;
 
 @end

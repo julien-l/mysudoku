@@ -23,6 +23,8 @@ void SudokuClearPuzzle(struct SudokuPuzzle *puzzle);
 
 struct SudokuCellContent * SudokuCellContentAtIndex(struct SudokuPuzzle *puzzle, uint index);
 
+void SudokuSetSelectedCellAtIndex(struct SudokuPuzzle *puzzle, uint index);
+
 void SudokuGeneratePuzzle(struct SudokuPuzzle *puzzle);
 
 bool SudokuSaveToFile(struct SudokuPuzzle *puzzle, const char *filename);

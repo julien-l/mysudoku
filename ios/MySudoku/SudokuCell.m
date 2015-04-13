@@ -39,6 +39,7 @@
 
 - (void)setContent:(SudokuCellContent*)cellContent
 {
+    _cellContent = cellContent;
     [_label setText:[NSString stringWithFormat:@"%d", cellContent->value]];
     switch (cellContent->type)
     {

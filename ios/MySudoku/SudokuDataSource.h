@@ -35,4 +35,6 @@
 
 - (SudokuCellContent*)cellContentAtIndex:(uint)index;
 
+- (void)setSelectedCellAtIndex:(uint)index;
+
 @end

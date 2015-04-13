@@ -18,6 +18,8 @@
 #define NCOLS 9
 #define NROWS 9
 
+#define NO_CELL_SELECTED 81
+
 SudokuPuzzle * SudokuAllocPuzzle()
 {
     SudokuPuzzle * ptr = (SudokuPuzzle*) malloc(sizeof(SudokuPuzzle));
@@ -40,12 +42,31 @@ void SudokuClearPuzzle(SudokuPuzzle *puzzle)
 {
     assert(NULL != puzzle && "SudokuClearPuzzle(): Bad input");
     memset(puzzle->board, 0, sizeof(SudokuCellContent)*NCOLS*NROWS);
+    for (uint i = 0; i < NROWS*NCOLS; ++i)
+    {
+        puzzle->board[i].index = i;
+    }
+    puzzle->selectedCellIndex = NO_CELL_SELECTED;
 }
 
 SudokuCellContent * SudokuCellContentAtIndex(SudokuPuzzle *puzzle, uint index)
 {
     assert(NULL != puzzle && index < NROWS*NCOLS && "SudokuCellContentAtIndex(): Bad input");
     return &(puzzle->board[index]);
+}
+
+void SudokuSetSelectedCellAtIndex(struct SudokuPuzzle *puzzle, uint index)
+{
+    assert(NULL != puzzle && index < NROWS*NCOLS && "SudokuSetSelectedCellAtIndex(): Bad input");
+    // Unselect previous cell
+    if (NO_CELL_SELECTED != puzzle->selectedCellIndex)
+    {
+        assert(CELL_STATE_SELECTED == puzzle->board[puzzle->selectedCellIndex].state && "SudokuSetSelectedCellAtIndex(): Inconsistent state");
+        puzzle->board[puzzle->selectedCellIndex].state = CELL_STATE_NONE;
+    }
+    // Select new one
+    puzzle->selectedCellIndex = index;
+    puzzle->board[index].state = CELL_STATE_SELECTED;
 }
 
 void SudokuGeneratePuzzle(SudokuPuzzle *puzzle)

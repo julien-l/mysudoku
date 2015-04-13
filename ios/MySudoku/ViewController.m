@@ -40,6 +40,10 @@
     return SudokuCellContentAtIndex(thePuzzle, index);
 }
 
+- (void)setSelectedCellAtIndex:(uint)index {
+    SudokuSetSelectedCellAtIndex(thePuzzle, index);
+}
+
 - (void)dealloc {
     NSLog(@"dealloc()");
     SudokuDeallocPuzzle(thePuzzle);
