@@ -118,7 +118,7 @@
     assert(nil != _delegate && "buttonTapped(): Cannot update the cell selection, no delegate is set");
     assert(nil != sender.cellContent && "buttonTapped(): Sender button has no content");
     [_delegate setSelectedCellAtIndex:sender.cellContent->index];
-    [self setNeedsDisplay];
+    [self updateContent];
 }
 
 @end

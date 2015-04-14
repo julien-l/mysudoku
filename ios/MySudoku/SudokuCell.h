@@ -11,11 +11,6 @@
 
 @interface SudokuCell : UIControl
 
-@property uint cellBorderWidth;         //!< Size of the borders between cells in the same region
-@property UIColor * cellBorderColor;    //!< Color of the borders
-@property UIColor * textColor;          //!< Color for the text
-@property UIColor * cellInitialBackgroundColor;     //!< Color of the background of "initial" cells
-
 @property (nonatomic, setter=setContent:) SudokuCellContent *cellContent;
 
 - (void)setContent:(SudokuCellContent*)cellContent;

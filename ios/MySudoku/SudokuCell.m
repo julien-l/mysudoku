@@ -9,10 +9,11 @@
 #import "SudokuCell.h"
 #import <UIKit/UILabel.h>
 #import "UIView+Borders.h"
+#import "Theme.h"
 
 @interface SudokuCell ()
 
-    @property UILabel * label;
+    @property UILabel *label;
 
 @end
 
@@ -22,15 +23,9 @@
 {
     if (self = [super init])
     {
-        // Set default properties values
-        _cellBorderWidth = 1;
-        _cellBorderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.25f];
-        _textColor = [UIColor darkGrayColor];
-        _cellInitialBackgroundColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.25f];
-        // Configure the label
         _label = [UILabel new];
         [_label setTextAlignment:NSTextAlignmentCenter];
-        [_label setTextColor:_textColor];
+        [_label setTextColor:Theme.textColor];
         [_label setAutoresizingMask:(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight)];
         [self addSubview:_label];
     }
@@ -41,47 +36,49 @@
 {
     _cellContent = cellContent;
     [_label setText:[NSString stringWithFormat:@"%d", cellContent->value]];
+    // For the type we set the background color of the container (not the label)
     switch (cellContent->type)
     {
         case CELL_TYPE_INITIAL:
-            [_label setBackgroundColor:_cellInitialBackgroundColor];
+            [self setBackgroundColor:Theme.cellBackgroundColorForInitialType];
             break;
         default:
-            [_label setBackgroundColor:[UIColor whiteColor]];
+            [self setBackgroundColor:Theme.cellDefaultBackgroundColor];
             break;
     }
+    // For the state, we set the label's color (as an overlay)
     switch (cellContent->state)
     {
         case CELL_STATE_SELECTED:
-            [_label setBackgroundColor:[UIColor blueColor]];
+            [_label setBackgroundColor:Theme.cellOverlayColorForSelected];
             break;
         case CELL_STATE_PEER:
-            [_label setBackgroundColor:[[UIColor blueColor] colorWithAlphaComponent:0.25f]];
+            [_label setBackgroundColor:Theme.cellOverlayColorForPeer];
             break;
         default:
-            // Do nothing, leave the cells as-is
+            [_label setBackgroundColor:Theme.cellNoOverlayColor];
             break;
     }
 }
 
 - (void)addBorderRight
 {
-    [self borderRight:_cellBorderWidth color:_cellBorderColor];
+    [self borderRight:Theme.cellBorderWidth color:Theme.cellBorderColor];
 }
 
 - (void)addBorderLeft
 {
-    [self borderLeft:_cellBorderWidth color:_cellBorderColor];
+    [self borderLeft:Theme.cellBorderWidth color:Theme.cellBorderColor];
 }
 
 - (void)addBorderBottom
 {
-    [self borderBottom:_cellBorderWidth color:_cellBorderColor];
+    [self borderBottom:Theme.cellBorderWidth color:Theme.cellBorderColor];
 }
 
 - (void)addBorderTop
 {
-    [self borderTop:_cellBorderWidth color:_cellBorderColor];
+    [self borderTop:Theme.cellBorderWidth color:Theme.cellBorderColor];
 }
 
 @end
