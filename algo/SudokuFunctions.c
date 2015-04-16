@@ -11,12 +11,14 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <math.h>
 
 #include "SudokuAlgorithms.h"
 #include "SudokuData.h"
 
-#define NCOLS 9
-#define NROWS 9
+#define NCOLS       9
+#define NROWS       9
+#define NREGIONS    3
 
 #define NO_CELL_SELECTED 81
 
@@ -55,6 +57,43 @@ SudokuCellContent * SudokuCellContentAtIndex(SudokuPuzzle *puzzle, uint index)
     return &(puzzle->board[index]);
 }
 
+void SudokuSetStateForPeersOfIndex(struct SudokuPuzzle *puzzle, uint index, int state)
+{
+    assert(NULL != puzzle && index < NROWS*NCOLS && "SudokuSetStateForPeersOfIndex(): Bad input");
+    // 0. get corresponding row and column
+    const uint rowIndex = (uint) floorf(index/NCOLS);
+    const uint colIndex = (uint) index%NCOLS;
+    for (uint col = 0; col < NCOLS; ++col)
+    {
+        if (colIndex == col) {
+            continue;
+        }
+        puzzle->board[rowIndex*NCOLS+col].state = state;
+    }
+    for (uint row = 0; row < NROWS; ++row)
+    {
+        if (rowIndex == row) {
+            continue;
+        }
+        puzzle->board[row*NCOLS+colIndex].state = state;
+    }
+    const uint regionRowIndex = (uint) floorf(rowIndex/NREGIONS);
+    const uint regionColIndex = (uint) floorf(colIndex/NREGIONS);
+    assert(regionRowIndex < NREGIONS && regionColIndex < NREGIONS && "SudokuSetStateForPeersOfIndex(): Region indices out of range");
+    const uint start = regionRowIndex*NREGIONS*NCOLS + regionColIndex*NREGIONS;
+    for (uint row = 0; row < NREGIONS; ++row)
+    {
+        for (uint col = 0; col < NREGIONS; ++col)
+        {
+            const uint currentIndex = start + row*NCOLS + col;
+            if (currentIndex == index) {
+                continue;
+            }
+            puzzle->board[currentIndex].state = state;
+        }
+    }
+}
+
 void SudokuSetSelectedCellAtIndex(struct SudokuPuzzle *puzzle, uint index)
 {
     assert(NULL != puzzle && index < NROWS*NCOLS && "SudokuSetSelectedCellAtIndex(): Bad input");
@@ -63,10 +102,12 @@ void SudokuSetSelectedCellAtIndex(struct SudokuPuzzle *puzzle, uint index)
     {
         assert(CELL_STATE_SELECTED == puzzle->board[puzzle->selectedCellIndex].state && "SudokuSetSelectedCellAtIndex(): Inconsistent state");
         puzzle->board[puzzle->selectedCellIndex].state = CELL_STATE_NONE;
+        SudokuSetStateForPeersOfIndex(puzzle, puzzle->selectedCellIndex, CELL_STATE_NONE);
     }
     // Select new one
     puzzle->selectedCellIndex = index;
     puzzle->board[index].state = CELL_STATE_SELECTED;
+    SudokuSetStateForPeersOfIndex(puzzle, index, CELL_STATE_PEER);
 }
 
 void SudokuGeneratePuzzle(SudokuPuzzle *puzzle)

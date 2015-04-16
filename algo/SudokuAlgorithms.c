@@ -94,10 +94,10 @@ bool SudokuCheckNoConflict(SudokuPuzzle *puzzle, uint index, uint value)
     }
     // 3. check region
     {
-        const uint unitRowIndex = (uint) floorf(rowIndex/NREGIONS);
-        const uint unitColIndex = (uint) floorf(colIndex/NREGIONS);
-        assert(unitRowIndex < NREGIONS && unitColIndex < NREGIONS && "SudokuCheckNoConflict(): Region indices out of range");
-        const uint start = unitRowIndex*NREGIONS*NCOLS + unitColIndex*NREGIONS;
+        const uint regionRowIndex = (uint) floorf(rowIndex/NREGIONS);
+        const uint regionColIndex = (uint) floorf(colIndex/NREGIONS);
+        assert(regionRowIndex < NREGIONS && regionColIndex < NREGIONS && "SudokuCheckNoConflict(): Region indices out of range");
+        const uint start = regionRowIndex*NREGIONS*NCOLS + regionColIndex*NREGIONS;
         for (uint row = 0; row < NREGIONS; ++row)
         {
             for (uint col = 0; col < NREGIONS; ++col)
