@@ -149,3 +149,15 @@ void SudokuGenerateSolution(SudokuPuzzle *puzzle)
         }
     }
 }
+
+void SudokuMakeHoles(struct SudokuPuzzle *puzzle, uint n)
+{
+    assert(NULL != puzzle && n < NROWS*NCOLS && "SudokuMakeHoles(): Bad input");
+    // Placeholder for now. A real algorithm needs to make sure that there is a
+    // solution when removing cells.
+    for (uint i = 0; i < n; ++i)
+    {
+        uint randomIndex = (uint) arc4random() % (NROWS*NCOLS);
+        puzzle->board[randomIndex].value = 0;
+    }
+}

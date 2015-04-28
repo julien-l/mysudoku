@@ -112,6 +112,7 @@ void SudokuGeneratePuzzle(SudokuPuzzle *puzzle)
     assert(NULL != puzzle && "SudokuGeneratePuzzle(): Bad input");
     SudokuClearPuzzle(puzzle);
     SudokuGenerateSolution(puzzle);
+    SudokuMakeHoles(puzzle, 10);
     for (uint i = 0; i < NROWS*NCOLS; ++i)
     {
         if (0 != puzzle->board[i].value)

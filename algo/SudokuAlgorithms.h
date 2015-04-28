@@ -16,4 +16,6 @@ struct SudokuPuzzle;
 
 void SudokuGenerateSolution(struct SudokuPuzzle *puzzle);
 
+void SudokuMakeHoles(struct SudokuPuzzle *puzzle, uint n);
+
 #endif /* defined(__MySudoku__SudokuAlgorithms__) */

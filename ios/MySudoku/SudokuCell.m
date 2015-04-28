@@ -35,7 +35,12 @@
 - (void)setContent:(SudokuCellContent*)cellContent
 {
     _cellContent = cellContent;
-    [_label setText:[NSString stringWithFormat:@"%d", cellContent->value]];
+    if (cellContent->value > 0) {
+        [_label setText:[NSString stringWithFormat:@"%d", cellContent->value]];
+    }
+    else {
+        [_label setText:@""];
+    }
     // For the type we set the background color of the container (not the label)
     switch (cellContent->type)
     {
