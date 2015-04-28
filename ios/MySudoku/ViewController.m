@@ -12,7 +12,6 @@
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet SudokuGrid *theGrid;
-@property (weak, nonatomic) IBOutlet UIButton *theGenerateButton;
 
 @end
 
@@ -45,13 +44,8 @@
 }
 
 - (void)dealloc {
-    NSLog(@"dealloc()");
     SudokuDeallocPuzzle(thePuzzle);
     thePuzzle = NULL;
-}
-
-- (IBAction)onGenerateButtonClicked:(id)sender {
-    [self generateThePuzzle];
 }
 
 - (void)generateThePuzzle {
@@ -61,6 +55,12 @@
     NSString *path = [[self applicationDocumentsDirectory].path
                        stringByAppendingPathComponent:@"SudokuSolution.txt"];
     SudokuSaveToFile(thePuzzle, [path UTF8String]);
+}
+
+- (IBAction)onNumberClicked:(UIButton *)sender {
+    const uint num = [[sender currentTitle] integerValue];
+    SudokuOnNumberClicked(thePuzzle, num);
+    [_theGrid updateContent];
 }
 
 /**

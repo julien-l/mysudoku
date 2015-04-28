@@ -59,12 +59,24 @@ struct SudokuCellContent
 
 typedef struct SudokuCellContent SudokuCellContent;
 
+//! \brief Current mode of selection (one by one or sequence)
+
+enum SudokuSelectionMode
+{
+    SELECTION_MODE_ONE_BY_ONE,  //!< Aka simple mode: select a cell then a number to fill it
+    SELECTION_MODE_SEQUENCE,    //!< Select a number then click on cells to fill (they will fill with the currently selected number)
+};
+
+typedef enum SudokuSelectionMode SudokuSelectionMode;
+
 //! \brief The puzzle data
 
 struct SudokuPuzzle
 {
     SudokuCellContent *board;
     uint selectedCellIndex;
+    SudokuSelectionMode selectionMode;
+    uint currentNumber;
 };
 
 typedef struct SudokuPuzzle SudokuPuzzle;
@@ -90,5 +102,7 @@ bool SudokuSaveToFile(SudokuPuzzle *puzzle, const char *filename);
 // -----------------------------------------------------------------------------
 
 void SudokuOnCellClicked(SudokuPuzzle *puzzle, uint index);
+
+void SudokuOnNumberClicked(SudokuPuzzle *puzzle, uint number);
 
 #endif /* defined(__MySudoku__Sudoku__) */

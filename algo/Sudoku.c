@@ -99,6 +99,8 @@ void SudokuClearPuzzle(SudokuPuzzle *puzzle)
         puzzle->board[i].index = i;
     }
     puzzle->selectedCellIndex = NO_CELL_SELECTED;
+    puzzle->selectionMode = SELECTION_MODE_ONE_BY_ONE;
+    puzzle->currentNumber = 1;
 }
 
 SudokuCellContent * SudokuCellContentAtIndex(SudokuPuzzle *puzzle, uint index)
@@ -147,6 +149,17 @@ bool SudokuSaveToFile(SudokuPuzzle *puzzle, const char *filename)
     }
     fclose(f);
     return true;
+}
+
+void SudokuOnNumberClicked(struct SudokuPuzzle *puzzle, uint number)
+{
+    assert(NULL != puzzle && number >= 1 && number <= 9 && "SudokuOnNumberClicked(): Bad input");
+    puzzle->currentNumber = number;
+    if (SELECTION_MODE_ONE_BY_ONE == puzzle->selectionMode &&
+        CELL_TYPE_INITIAL != CURRENT_CELL(puzzle).type)
+    {
+        CURRENT_CELL(puzzle).value = number;
+    }
 }
 
 // -----------------------------------------------------------------------------
