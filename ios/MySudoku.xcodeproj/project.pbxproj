@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F906B3231AD90552003D7883 /* SudokuFunctions.c in Sources */ = {isa = PBXBuildFile; fileRef = F906B3211AD90552003D7883 /* SudokuFunctions.c */; };
+		F906B3231AD90552003D7883 /* Sudoku.c in Sources */ = {isa = PBXBuildFile; fileRef = F906B3211AD90552003D7883 /* Sudoku.c */; };
 		F93D46A11ACA640400B914BF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F93D46A01ACA640400B914BF /* main.m */; };
 		F93D46A41ACA640400B914BF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F93D46A31ACA640400B914BF /* AppDelegate.m */; };
 		F93D46A71ACA640400B914BF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F93D46A61ACA640400B914BF /* ViewController.m */; };
@@ -34,8 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F906B3211AD90552003D7883 /* SudokuFunctions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SudokuFunctions.c; sourceTree = "<group>"; };
-		F906B3221AD90552003D7883 /* SudokuFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudokuFunctions.h; sourceTree = "<group>"; };
+		F906B3211AD90552003D7883 /* Sudoku.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Sudoku.c; sourceTree = "<group>"; };
 		F906B3241AD90671003D7883 /* Sudoku.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sudoku.h; sourceTree = "<group>"; };
 		F93D469B1ACA640400B914BF /* MySudoku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MySudoku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F93D469F1ACA640400B914BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,7 +61,6 @@
 		F9CBD6951ACBC1D600D588BF /* SudokuGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudokuGrid.m; sourceTree = "<group>"; };
 		F9CBD6961ACBC1D600D588BF /* UIView+Borders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Borders.h"; sourceTree = "<group>"; };
 		F9CBD6971ACBC1D600D588BF /* UIView+Borders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Borders.m"; sourceTree = "<group>"; };
-		F9F99B271ACF170000F1ABE4 /* SudokuData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SudokuData.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,9 +157,7 @@
 			children = (
 				F950F2231AD0FDF1007C2024 /* SudokuAlgorithms.c */,
 				F950F2241AD0FDF1007C2024 /* SudokuAlgorithms.h */,
-				F9F99B271ACF170000F1ABE4 /* SudokuData.h */,
-				F906B3211AD90552003D7883 /* SudokuFunctions.c */,
-				F906B3221AD90552003D7883 /* SudokuFunctions.h */,
+				F906B3211AD90552003D7883 /* Sudoku.c */,
 				F906B3241AD90671003D7883 /* Sudoku.h */,
 			);
 			name = algo;
@@ -276,7 +272,7 @@
 				F93D46A41ACA640400B914BF /* AppDelegate.m in Sources */,
 				F9CBD6981ACBC1D600D588BF /* SudokuGrid.m in Sources */,
 				F93D46A11ACA640400B914BF /* main.m in Sources */,
-				F906B3231AD90552003D7883 /* SudokuFunctions.c in Sources */,
+				F906B3231AD90552003D7883 /* Sudoku.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

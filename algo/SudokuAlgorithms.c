@@ -11,7 +11,7 @@
 #include <assert.h>
 #include <math.h>
 
-#include "SudokuData.h"
+#include "Sudoku.h"
 
 typedef int CandidateListType;
 
@@ -62,13 +62,9 @@ uint GetRandomNumberFromCandidateListAndRemoveIt(CandidateListType *list, uint i
     return (uint)(candidate+1); // Indices start at 0 but values start at 1, need to increase
 }
 
-// -----------------------------------------------------------------------------
-// Functions from the interface
-// -----------------------------------------------------------------------------
-
-bool SudokuCheckNoConflict(SudokuPuzzle *puzzle, uint index, uint value)
+bool CheckNoConflict(SudokuPuzzle *puzzle, uint index, uint value)
 {
-    assert(NULL != puzzle && index < (NROWS*NCOLS) && "SudokuCheckNoConflict(): Bad input");
+    assert(NULL != puzzle && index < (NROWS*NCOLS) && "CheckNoConflict(): Bad input");
     // 0. get corresponding row and column
     const uint rowIndex = (uint) floorf(index/NCOLS);
     const uint colIndex = (uint) index%NCOLS;
@@ -96,7 +92,7 @@ bool SudokuCheckNoConflict(SudokuPuzzle *puzzle, uint index, uint value)
     {
         const uint regionRowIndex = (uint) floorf(rowIndex/NREGIONS);
         const uint regionColIndex = (uint) floorf(colIndex/NREGIONS);
-        assert(regionRowIndex < NREGIONS && regionColIndex < NREGIONS && "SudokuCheckNoConflict(): Region indices out of range");
+        assert(regionRowIndex < NREGIONS && regionColIndex < NREGIONS && "CheckNoConflict(): Region indices out of range");
         const uint start = regionRowIndex*NREGIONS*NCOLS + regionColIndex*NREGIONS;
         for (uint row = 0; row < NREGIONS; ++row)
         {
@@ -116,6 +112,10 @@ bool SudokuCheckNoConflict(SudokuPuzzle *puzzle, uint index, uint value)
     return true;
 }
 
+// -----------------------------------------------------------------------------
+// Functions from the interface
+// -----------------------------------------------------------------------------
+
 void SudokuGenerateSolution(SudokuPuzzle *puzzle)
 {
     assert(NULL != puzzle && "SudokuGenerateSolution(): Bad input");
@@ -133,7 +133,7 @@ void SudokuGenerateSolution(SudokuPuzzle *puzzle)
         if (BIT_CHECK_ANY(candidateList[i]))
         {
             const uint num = GetRandomNumberFromCandidateListAndRemoveIt(candidateList, i);
-            if (SudokuCheckNoConflict(puzzle, i, num))
+            if (CheckNoConflict(puzzle, i, num))
             {
                 puzzle->board[i].value = num;
                 ++i;

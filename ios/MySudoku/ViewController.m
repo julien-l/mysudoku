@@ -41,7 +41,7 @@
 }
 
 - (void)setSelectedCellAtIndex:(uint)index {
-    SudokuSetSelectedCellAtIndex(thePuzzle, index);
+    SudokuOnCellClicked(thePuzzle, index);
 }
 
 - (void)dealloc {
