@@ -41,6 +41,7 @@
 
 - (void)setSelectedCellAtIndex:(uint)index {
     SudokuOnCellClicked(thePuzzle, index);
+    [self onPuzzleUpdated];
 }
 
 - (void)dealloc {
@@ -50,7 +51,7 @@
 
 - (void)generateThePuzzle {
     SudokuGeneratePuzzle(thePuzzle);
-    [_theGrid updateContent];
+    [self onPuzzleUpdated];
     // Lines below are for debug
     NSString *path = [[self applicationDocumentsDirectory].path
                        stringByAppendingPathComponent:@"SudokuSolution.txt"];
@@ -60,12 +61,31 @@
 - (IBAction)onNumberClicked:(UIButton *)sender {
     const uint num = [[sender currentTitle] integerValue];
     SudokuOnNumberClicked(thePuzzle, num);
-    [_theGrid updateContent];
+    [self onPuzzleUpdated];
 }
 
 - (IBAction)onEraserClicked:(UIButton *)sender {
     SudokuOnEraserClicked(thePuzzle);
+    [self onPuzzleUpdated];
+}
+
+- (void)onPuzzleUpdated
+{
     [_theGrid updateContent];
+    if (thePuzzle->isFinished)
+    {
+        UIAlertView *alert =[[UIAlertView alloc ] initWithTitle:@"Puzzle complete"
+            message:@"Puzzle complete"
+            delegate:self
+            cancelButtonTitle:@"Ok"
+            otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"Finished, put code to return to menu");
 }
 
 /**

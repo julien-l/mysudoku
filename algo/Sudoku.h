@@ -21,9 +21,7 @@
 
 enum SudokuCellType
 {
-    CELL_TYPE_EMPTY = 0,    //!< Cell is empty
-    CELL_TYPE_NUMBER,       //!< Cell has one number
-    CELL_TYPE_PENCIL,       //!< Cell has one or more pencil notes
+    CELL_TYPE_EMPTY = 0,    //!< Cell is initially empty (needs to be filled)
     CELL_TYPE_INITIAL,      //!< Cell has a number part of the initial values
 };
 
@@ -42,12 +40,6 @@ enum SudokuCellState
 typedef enum SudokuCellState SudokuCellState;
 
 //! \brief The content of one cell
-//!
-//! Array \c content is populated according to the value of \c type:
-//! - empty if \c type is \c CELL_TYPE_EMPTY
-//! - size 1 if \c type is \c CELL_TYPE_NUMBER
-//! - size in range [0 9] if \c type is \c CELL_TYPE_PENCIL
-//! - size 1 if \c type is \c CELL_TYPE_INITIAL
 
 struct SudokuCellContent
 {
@@ -77,6 +69,7 @@ struct SudokuPuzzle
     uint selectedCellIndex;
     SudokuSelectionMode selectionMode;
     uint currentNumber;
+    bool isFinished;
 };
 
 typedef struct SudokuPuzzle SudokuPuzzle;

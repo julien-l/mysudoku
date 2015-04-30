@@ -161,3 +161,23 @@ void SudokuMakeHoles(struct SudokuPuzzle *puzzle, uint n)
         puzzle->board[randomIndex].value = 0;
     }
 }
+
+void SudokuCheckIfValidAndFinished(SudokuPuzzle *puzzle)
+{
+    assert(NULL != puzzle && "SudokuCheckIfValidAndFinished(): Bad input");
+    puzzle->isFinished = false;
+    // Divide the test into two loops.
+    // Motivation: the second test (for conflicts) takes more time and needs to
+    // be performed only when all cells have been filled
+    for (uint i = 0; i < NROWS*NCOLS; ++i)
+    {
+        if (0 == puzzle->board[i].value)
+            return;
+    }
+    for (uint i = 0; i < NROWS*NCOLS; ++i)
+    {
+        if (!CheckNoConflict(puzzle, i, puzzle->board[i].value))
+            return;
+    }
+    puzzle->isFinished = true;
+}

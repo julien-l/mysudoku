@@ -102,6 +102,7 @@ void SudokuClearPuzzle(SudokuPuzzle *puzzle)
     puzzle->selectedCellIndex = NO_CELL_SELECTED;
     puzzle->selectionMode = SELECTION_MODE_ONE_BY_ONE;
     puzzle->currentNumber = NO_CELL_SELECTED;
+    puzzle->isFinished = false;
 }
 
 SudokuCellContent * SudokuCellContentAtIndex(SudokuPuzzle *puzzle, uint index)
@@ -165,6 +166,7 @@ void SudokuOnNumberClicked(struct SudokuPuzzle *puzzle, uint number)
         CELL_TYPE_INITIAL != CURRENT_CELL(puzzle).type)
     {
         CURRENT_CELL(puzzle).value = number;
+        SudokuCheckIfValidAndFinished(puzzle);
     }
 }
 
@@ -192,5 +194,6 @@ void SudokuOnEraserClicked(SudokuPuzzle *puzzle)
         CELL_TYPE_INITIAL != CURRENT_CELL(puzzle).type)
     {
         CURRENT_CELL(puzzle).value = 0;
+        SudokuCheckIfValidAndFinished(puzzle);
     }
 }
