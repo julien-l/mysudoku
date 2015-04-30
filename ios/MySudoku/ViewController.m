@@ -63,6 +63,11 @@
     [_theGrid updateContent];
 }
 
+- (IBAction)onEraserClicked:(UIButton *)sender {
+    SudokuOnEraserClicked(thePuzzle);
+    [_theGrid updateContent];
+}
+
 /**
  Returns the URL to the application's Documents directory.
  */

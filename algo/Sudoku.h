@@ -105,4 +105,6 @@ void SudokuOnCellClicked(SudokuPuzzle *puzzle, uint index);
 
 void SudokuOnNumberClicked(SudokuPuzzle *puzzle, uint number);
 
+void SudokuOnEraserClicked(SudokuPuzzle *puzzle);
+
 #endif /* defined(__MySudoku__Sudoku__) */

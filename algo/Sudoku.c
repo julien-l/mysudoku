@@ -20,7 +20,8 @@
 #define NROWS       9
 #define NREGIONS    3
 
-#define NO_CELL_SELECTED 81
+#define NO_CELL_SELECTED    81
+#define ERASER_SELECTED     82
 
 // Helper macros
 #define CURRENT_CELL(p)         p->board[p->selectedCellIndex]
@@ -100,7 +101,7 @@ void SudokuClearPuzzle(SudokuPuzzle *puzzle)
     }
     puzzle->selectedCellIndex = NO_CELL_SELECTED;
     puzzle->selectionMode = SELECTION_MODE_ONE_BY_ONE;
-    puzzle->currentNumber = 1;
+    puzzle->currentNumber = NO_CELL_SELECTED;
 }
 
 SudokuCellContent * SudokuCellContentAtIndex(SudokuPuzzle *puzzle, uint index)
@@ -151,20 +152,21 @@ bool SudokuSaveToFile(SudokuPuzzle *puzzle, const char *filename)
     return true;
 }
 
+// -----------------------------------------------------------------------------
+// Callbacks for user interface
+// -----------------------------------------------------------------------------
+
 void SudokuOnNumberClicked(struct SudokuPuzzle *puzzle, uint number)
 {
     assert(NULL != puzzle && number >= 1 && number <= 9 && "SudokuOnNumberClicked(): Bad input");
     puzzle->currentNumber = number;
     if (SELECTION_MODE_ONE_BY_ONE == puzzle->selectionMode &&
+        NO_CELL_SELECTED != puzzle->selectedCellIndex &&
         CELL_TYPE_INITIAL != CURRENT_CELL(puzzle).type)
     {
         CURRENT_CELL(puzzle).value = number;
     }
 }
-
-// -----------------------------------------------------------------------------
-// Callbacks for user interface
-// -----------------------------------------------------------------------------
 
 void SudokuOnCellClicked(struct SudokuPuzzle *puzzle, uint index)
 {
@@ -179,4 +181,16 @@ void SudokuOnCellClicked(struct SudokuPuzzle *puzzle, uint index)
     puzzle->selectedCellIndex = index;
     CURRENT_CELL(puzzle).state = CELL_STATE_SELECTED;
     SetStateForPeersOfIndex(puzzle, puzzle->selectedCellIndex, CELL_STATE_PEER);
+}
+
+void SudokuOnEraserClicked(SudokuPuzzle *puzzle)
+{
+    assert(NULL != puzzle && "SudokuOnEraserClicked(): Bad input");
+    puzzle->currentNumber = ERASER_SELECTED;
+    if (SELECTION_MODE_ONE_BY_ONE == puzzle->selectionMode &&
+        NO_CELL_SELECTED != puzzle->selectedCellIndex &&
+        CELL_TYPE_INITIAL != CURRENT_CELL(puzzle).type)
+    {
+        CURRENT_CELL(puzzle).value = 0;
+    }
 }
