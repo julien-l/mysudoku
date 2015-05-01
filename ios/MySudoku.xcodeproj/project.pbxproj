@@ -21,6 +21,7 @@
 		F9B0A8061ACA7ADD00E20F67 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9B0A8051ACA7ADD00E20F67 /* iAd.framework */; };
 		F9CBD6981ACBC1D600D588BF /* SudokuGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CBD6951ACBC1D600D588BF /* SudokuGrid.m */; };
 		F9CBD6991ACBC1D600D588BF /* UIView+Borders.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CBD6971ACBC1D600D588BF /* UIView+Borders.m */; };
+		F9CCCC171AF607100006F71B /* DismissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = F9CCCC161AF607100006F71B /* DismissSegue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		F9CBD6951ACBC1D600D588BF /* SudokuGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SudokuGrid.m; sourceTree = "<group>"; };
 		F9CBD6961ACBC1D600D588BF /* UIView+Borders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Borders.h"; sourceTree = "<group>"; };
 		F9CBD6971ACBC1D600D588BF /* UIView+Borders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Borders.m"; sourceTree = "<group>"; };
+		F9CCCC151AF607100006F71B /* DismissSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissSegue.h; sourceTree = "<group>"; };
+		F9CCCC161AF607100006F71B /* DismissSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissSegue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,8 @@
 				F93D46AB1ACA640400B914BF /* Images.xcassets */,
 				F93D46AD1ACA640400B914BF /* LaunchScreen.xib */,
 				F93D46A81ACA640400B914BF /* Main.storyboard */,
+				F9CCCC151AF607100006F71B /* DismissSegue.h */,
+				F9CCCC161AF607100006F71B /* DismissSegue.m */,
 				F971BE811ACD1AA800BA932B /* SudokuCell.h */,
 				F971BE821ACD1AA800BA932B /* SudokuCell.m */,
 				F971BE801ACD181000BA932B /* SudokuDataSource.h */,
@@ -266,6 +271,7 @@
 			files = (
 				F93D46A71ACA640400B914BF /* ViewController.m in Sources */,
 				F9CBD6991ACBC1D600D588BF /* UIView+Borders.m in Sources */,
+				F9CCCC171AF607100006F71B /* DismissSegue.m in Sources */,
 				F950F2251AD0FDF1007C2024 /* SudokuAlgorithms.c in Sources */,
 				F971BE831ACD1AA800BA932B /* SudokuCell.m in Sources */,
 				F9501B101ADB855B00B62AD2 /* Theme.m in Sources */,

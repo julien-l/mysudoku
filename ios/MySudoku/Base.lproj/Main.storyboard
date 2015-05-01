@@ -1,14 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="agY-Nt-dx5">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Menu-->
+        <scene sceneID="Yo7-yq-yyN">
+            <objects>
+                <viewController id="agY-Nt-dx5" userLabel="Menu" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vgb-2X-jA0"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vjw-Wh-bmX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PpG-Y7-36y">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Sudoku" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qgo-mg-RXm">
+                                <rect key="frame" x="256" y="290" width="88" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQC-tI-YTp">
+                                <rect key="frame" x="284" y="319" width="33" height="30"/>
+                                <state key="normal" title="Easy">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" id="gIK-FY-mlR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="gQC-tI-YTp" secondAttribute="centerX" id="LzV-h4-IAh"/>
+                            <constraint firstItem="gQC-tI-YTp" firstAttribute="top" secondItem="Qgo-mg-RXm" secondAttribute="bottom" constant="8" id="UNl-QW-B3p"/>
+                            <constraint firstAttribute="centerY" secondItem="Qgo-mg-RXm" secondAttribute="centerY" id="VPl-ey-BXL"/>
+                            <constraint firstAttribute="centerX" secondItem="Qgo-mg-RXm" secondAttribute="centerX" id="wbf-Ce-1kS"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sed-jV-Uyh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-187" y="315"/>
+        </scene>
+        <!--Game view-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="Game view" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -132,9 +173,19 @@
                                             <action selector="onNumberClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cdu-EV-FQw"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dck-wp-nE0">
+                                        <rect key="frame" x="553" y="8" width="39" height="30"/>
+                                        <state key="normal" title="menu">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="agY-Nt-dx5" kind="custom" customClass="DismissSegue" id="GnH-eD-jhN"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="l3O-Rm-1gw" firstAttribute="baseline" secondItem="CQZ-aY-3vw" secondAttribute="baseline" id="0xd-Dk-X04"/>
+                                    <constraint firstItem="Dck-wp-nE0" firstAttribute="top" secondItem="7Ot-Qy-lab" secondAttribute="top" constant="8" id="9eb-Gj-pD8"/>
                                     <constraint firstItem="T7B-hL-Ned" firstAttribute="baseline" secondItem="1Ug-Mf-1Gj" secondAttribute="baseline" id="A1j-cQ-cSZ"/>
                                     <constraint firstItem="vXy-7R-8pP" firstAttribute="leading" secondItem="bjb-Le-0hf" secondAttribute="trailing" constant="8" id="FGI-qO-B1O"/>
                                     <constraint firstItem="Nqa-MU-GyY" firstAttribute="leading" secondItem="CQZ-aY-3vw" secondAttribute="trailing" constant="8" id="HhH-Ke-FkE"/>
@@ -148,6 +199,7 @@
                                     <constraint firstItem="1Ug-Mf-1Gj" firstAttribute="leading" secondItem="3S0-4G-OAQ" secondAttribute="trailing" constant="8" id="cDG-io-Hpd"/>
                                     <constraint firstItem="Nqa-MU-GyY" firstAttribute="baseline" secondItem="CQZ-aY-3vw" secondAttribute="baseline" id="f1r-Wl-sxe"/>
                                     <constraint firstItem="Oje-hp-Mg4" firstAttribute="leading" secondItem="T7B-hL-Ned" secondAttribute="trailing" constant="8" id="fMn-y2-7W7"/>
+                                    <constraint firstAttribute="trailing" secondItem="Dck-wp-nE0" secondAttribute="trailing" constant="8" id="ge8-wd-6zY"/>
                                     <constraint firstItem="l3O-Rm-1gw" firstAttribute="leading" secondItem="Nqa-MU-GyY" secondAttribute="trailing" constant="8" id="j9E-t7-KLM"/>
                                     <constraint firstItem="T7B-hL-Ned" firstAttribute="baseline" secondItem="3S0-4G-OAQ" secondAttribute="baseline" id="k21-vF-uh3"/>
                                     <constraint firstItem="5RP-Pu-g4X" firstAttribute="leading" secondItem="Oje-hp-Mg4" secondAttribute="trailing" constant="8" id="pLx-2a-UeS"/>
@@ -180,7 +232,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="499" y="315"/>
+            <point key="canvasLocation" x="555" y="315"/>
         </scene>
     </scenes>
 </document>
