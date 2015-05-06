@@ -107,7 +107,7 @@
     assert(nil != _delegate && "updateContent(): Cannot update grid content, no delegate is set");
     for (uint i = 0; i < NROWS*NCOLS; ++i)
     {
-        [m_labelArray[i] setContent:[_delegate cellContentAtIndex:i]];
+        [m_labelArray[i] setCellContentPtr:[_delegate cellContentAtIndex:i]];
     }
     [self setNeedsDisplay];
 }
@@ -115,8 +115,8 @@
 - (IBAction)buttonTapped:(SudokuCell*)sender
 {
     assert(nil != _delegate && "buttonTapped(): Cannot update the cell selection, no delegate is set");
-    assert(nil != sender.cellContent && "buttonTapped(): Sender button has no content");
-    [_delegate setSelectedCellAtIndex:sender.cellContent->index];
+    assert(nil != sender.cellContentPtr && "buttonTapped(): Sender button has no content");
+    [_delegate setSelectedCellAtIndex:sender.cellContentPtr->index];
 }
 
 @end

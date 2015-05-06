@@ -32,17 +32,20 @@
     return self;
 }
 
-- (void)setContent:(SudokuCellContent*)cellContent
+- (void)setCellContentPtr:(SudokuCellContent *)cellContentPtr
 {
-    _cellContent = cellContent;
-    if (cellContent->value > 0) {
-        [_label setText:[NSString stringWithFormat:@"%d", cellContent->value]];
+    _cellContentPtr = cellContentPtr;
+    if (nil == _cellContentPtr) {
+        return;
+    }
+    if (_cellContentPtr->value > 0) {
+        [_label setText:[NSString stringWithFormat:@"%d", _cellContentPtr->value]];
     }
     else {
         [_label setText:@""];
     }
     // For the type we set the background color of the container (not the label)
-    switch (cellContent->type)
+    switch (_cellContentPtr->type)
     {
         case CELL_TYPE_INITIAL:
             [self setBackgroundColor:Theme.cellBackgroundColorForInitialType];
@@ -52,7 +55,7 @@
             break;
     }
     // For the state, we set the label's color (as an overlay)
-    switch (cellContent->state)
+    switch (_cellContentPtr->state)
     {
         case CELL_STATE_SELECTED:
             [_label setBackgroundColor:Theme.cellOverlayColorForSelected];
