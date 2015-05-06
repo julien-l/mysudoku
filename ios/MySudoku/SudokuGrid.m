@@ -14,7 +14,6 @@
 
 @implementation SudokuGrid
 {
-    int m_cellWidthList [NCOLS];
     SudokuCell *m_labelArray [NROWS*NCOLS];
 }
 
@@ -26,7 +25,6 @@
 
 - (void)initHelper
 {
-    memset(m_cellWidthList, 0, sizeof(m_cellWidthList));
     for (uint i = 0; i < NROWS*NCOLS; ++i)
     {
         SudokuCell *cell = [SudokuCell new];
@@ -36,7 +34,7 @@
     }
 }
 
--  (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self)
@@ -61,7 +59,8 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-
+    int m_cellWidthList [NCOLS];
+    memset(m_cellWidthList, 0, sizeof(m_cellWidthList));
     // Compute the layout for the 9x9 grid
     const CGRect rect = [self frame];
     const uint usableWidth = ((uint) rect.size.width);
