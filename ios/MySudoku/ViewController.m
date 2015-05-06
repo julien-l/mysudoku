@@ -85,7 +85,7 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"Finished, put code to return to menu");
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 /**
