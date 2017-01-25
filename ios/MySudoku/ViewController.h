@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "SudokuDataSource.h"
 
-@interface ViewController : UIViewController <SudokuDataSource, UIAlertViewDelegate>
+@interface ViewController : UIViewController <SudokuDataSource>
 
 @end
-
