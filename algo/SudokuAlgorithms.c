@@ -116,9 +116,9 @@ bool CheckNoConflict(SudokuPuzzle *puzzle, uint index, uint value)
 // Functions from the interface
 // -----------------------------------------------------------------------------
 
-void SudokuGenerateSolution(SudokuPuzzle *puzzle)
+void sudoku_generate_solution(SudokuPuzzle *puzzle)
 {
-    assert(NULL != puzzle && "SudokuGenerateSolution(): Bad input");
+    assert(NULL != puzzle && "sudoku_generate_solution(): Bad input");
     CandidateListType candidateList [NCOLS*NROWS];
     for (uint i = 0; i < NROWS*NCOLS; ++i)
     {
@@ -142,7 +142,7 @@ void SudokuGenerateSolution(SudokuPuzzle *puzzle)
         // Else, backtrack
         else
         {
-            assert(i > 0 && "SudokuGenerateSolution(): Trying to backtrack past 0");
+            assert(i > 0 && "sudoku_generate_solution(): Trying to backtrack past 0");
             BIT_REFILL_CANDIDATES(candidateList[i]);
             puzzle->board[i].value = 0;
             --i;
@@ -150,9 +150,9 @@ void SudokuGenerateSolution(SudokuPuzzle *puzzle)
     }
 }
 
-void SudokuMakeHoles(struct SudokuPuzzle *puzzle, uint n)
+void sudoku_make_holes(struct SudokuPuzzle *puzzle, uint n)
 {
-    assert(NULL != puzzle && n < NROWS*NCOLS && "SudokuMakeHoles(): Bad input");
+    assert(NULL != puzzle && n < NROWS*NCOLS && "sudoku_make_holes(): Bad input");
     // Placeholder for now. A real algorithm needs to make sure that there is a
     // solution when removing cells.
     for (uint i = 0; i < n; ++i)
@@ -162,9 +162,9 @@ void SudokuMakeHoles(struct SudokuPuzzle *puzzle, uint n)
     }
 }
 
-void SudokuCheckIfValidAndFinished(SudokuPuzzle *puzzle)
+void sudoku_check_if_valid_and_finished(SudokuPuzzle *puzzle)
 {
-    assert(NULL != puzzle && "SudokuCheckIfValidAndFinished(): Bad input");
+    assert(NULL != puzzle && "sudoku_check_if_valid_and_finished(): Bad input");
     puzzle->isFinished = false;
     // Divide the test into two loops.
     // Motivation: the second test (for conflicts) takes more time and needs to

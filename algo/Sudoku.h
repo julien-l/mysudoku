@@ -78,26 +78,26 @@ typedef struct SudokuPuzzle SudokuPuzzle;
 // Interface
 // -----------------------------------------------------------------------------
 
-SudokuPuzzle * SudokuAllocPuzzle();
+SudokuPuzzle * sudoku_alloc_puzzle();
 
-void SudokuDeallocPuzzle(SudokuPuzzle *puzzle);
+void sudoku_dealloc_puzzle(SudokuPuzzle *puzzle);
 
-void SudokuClearPuzzle(SudokuPuzzle *puzzle);
+void sudoku_clear_puzzle(SudokuPuzzle *puzzle);
 
-SudokuCellContent * SudokuCellContentAtIndex(SudokuPuzzle *puzzle, uint index);
+SudokuCellContent * sudoku_cell_content_at_index(SudokuPuzzle *puzzle, uint index);
 
-void SudokuGeneratePuzzle(SudokuPuzzle *puzzle);
+void sudoku_generate_puzzle(SudokuPuzzle *puzzle);
 
-bool SudokuSaveToFile(SudokuPuzzle *puzzle, const char *filename);
+bool sudoku_save_to_file(SudokuPuzzle *puzzle, const char *filename);
 
 // -----------------------------------------------------------------------------
 // Callbacks for user interface
 // -----------------------------------------------------------------------------
 
-void SudokuOnCellClicked(SudokuPuzzle *puzzle, uint index);
+void sudoku_on_cell_clicked(SudokuPuzzle *puzzle, uint index);
 
-void SudokuOnNumberClicked(SudokuPuzzle *puzzle, uint number);
+void sudoku_on_number_clicked(SudokuPuzzle *puzzle, uint number);
 
-void SudokuOnEraserClicked(SudokuPuzzle *puzzle);
+void sudoku_on_eraser_clicked(SudokuPuzzle *puzzle);
 
 #endif /* defined(__MySudoku__Sudoku__) */

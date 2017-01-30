@@ -26,7 +26,7 @@
     assert(nil != _theGrid && "viewDidLoad(): The grid property is null. Did you set the referencing outlet?");
     [_theGrid setDelegate:self];
     if (nil == thePuzzle) {
-        thePuzzle = SudokuAllocPuzzle();
+        thePuzzle = sudoku_alloc_puzzle();
     }
     [self generateThePuzzle];
 }
@@ -41,11 +41,11 @@
 //
 
 - (SudokuCellContent*)cellContentAtIndex:(uint)index {
-    return SudokuCellContentAtIndex(thePuzzle, index);
+    return sudoku_cell_content_at_index(thePuzzle, index);
 }
 
 - (void)setSelectedCellAtIndex:(uint)index {
-    SudokuOnCellClicked(thePuzzle, index);
+    sudoku_on_cell_clicked(thePuzzle, index);
     [self onPuzzleUpdated];
 }
 
@@ -54,7 +54,7 @@
 //
 
 - (void)dealloc {
-    SudokuDeallocPuzzle(thePuzzle);
+    sudoku_dealloc_puzzle(thePuzzle);
     thePuzzle = NULL;
 }
 
@@ -63,22 +63,22 @@
 //
 
 - (void)generateThePuzzle {
-    SudokuGeneratePuzzle(thePuzzle);
+    sudoku_generate_puzzle(thePuzzle);
     [self onPuzzleUpdated];
     // Lines below are for debug
     NSString *path = [[self applicationDocumentsDirectory].path
                        stringByAppendingPathComponent:@"SudokuSolution.txt"];
-    SudokuSaveToFile(thePuzzle, [path UTF8String]);
+    sudoku_save_to_file(thePuzzle, [path UTF8String]);
 }
 
 - (IBAction)onNumberClicked:(UIButton *)sender {
     const uint num = [[sender currentTitle] intValue];
-    SudokuOnNumberClicked(thePuzzle, num);
+    sudoku_on_number_clicked(thePuzzle, num);
     [self onPuzzleUpdated];
 }
 
 - (IBAction)onEraserClicked:(UIButton *)sender {
-    SudokuOnEraserClicked(thePuzzle);
+    sudoku_on_eraser_clicked(thePuzzle);
     [self onPuzzleUpdated];
 }
 
