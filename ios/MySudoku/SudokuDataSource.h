@@ -34,7 +34,7 @@
 @protocol SudokuDataSource <NSObject>
 
 //! \brief The GUI gets the content of the cell at the given index
-- (SudokuCellContent*)cellContentAtIndex:(uint)index;
+- (struct SudokuCellContent*)cellContentAtIndex:(uint)index;
 
 //! \brief The GUI indicates the cell at the given index was clicked
 - (void)setSelectedCellAtIndex:(uint)index;

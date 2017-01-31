@@ -11,7 +11,7 @@
 
 @interface SudokuCell : UIControl
 
-@property (nonatomic) SudokuCellContent *cellContentPtr;
+@property (nonatomic) struct SudokuCellContent *cellContentPtr;
 
 - (void)addBorderRight;
 - (void)addBorderLeft;

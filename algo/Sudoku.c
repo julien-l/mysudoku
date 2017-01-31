@@ -24,119 +24,133 @@
 #define ERASER_SELECTED     82
 
 // Helper macros
-#define CURRENT_CELL(p)         p->board[p->selectedCellIndex]
+#define CURRENT_CELL(p)         p->m_board[p->m_selectedCellIndex]
 #define IN_RANGE(n,low,up)      (n>=low && n<=up)
 
-// -----------------------------------------------------------------------------
-// Helper functions
-// -----------------------------------------------------------------------------
+//
+// Local functions
+//
 
-void SetStateForPeersOfIndex(struct SudokuPuzzle *puzzle, uint index, int state)
+//! \brief Update the graphical state of the peers of the given cell
+
+void set_state_for_peers_of_index(struct SudokuPuzzle *puzzle, unsigned int index, int state)
 {
-    assert(NULL != puzzle && index < NROWS*NCOLS && "SetStateForPeersOfIndex(): Bad input");
+    assert(NULL != puzzle && index < NROWS*NCOLS && "set_state_for_peers_of_index(): Bad input");
     // get corresponding row and column
-    const uint rowIndex = (uint) floorf(index/NCOLS);
-    const uint colIndex = (uint) index%NCOLS;
+    const unsigned int rowIndex = (unsigned int) floorf(index/NCOLS);
+    const unsigned int colIndex = (unsigned int) index%NCOLS;
     // update row and column
-    for (uint col = 0; col < NCOLS; ++col)
+    for (unsigned int col = 0; col < NCOLS; ++col)
     {
         if (colIndex == col) {
             continue;
         }
-        puzzle->board[rowIndex*NCOLS+col].state = state;
+        puzzle->m_board[rowIndex*NCOLS+col].m_state = state;
     }
-    for (uint row = 0; row < NROWS; ++row)
+    for (unsigned int row = 0; row < NROWS; ++row)
     {
         if (rowIndex == row) {
             continue;
         }
-        puzzle->board[row*NCOLS+colIndex].state = state;
+        puzzle->m_board[row*NCOLS+colIndex].m_state = state;
     }
     // update region
-    const uint regionRowIndex = (uint) floorf(rowIndex/NREGIONS);
-    const uint regionColIndex = (uint) floorf(colIndex/NREGIONS);
-    assert(regionRowIndex < NREGIONS && regionColIndex < NREGIONS && "SetStateForPeersOfIndex(): Region indices out of range");
-    const uint start = regionRowIndex*NREGIONS*NCOLS + regionColIndex*NREGIONS;
-    for (uint row = 0; row < NREGIONS; ++row)
+    const unsigned int regionRowIndex = (unsigned int) floorf(rowIndex/NREGIONS);
+    const unsigned int regionColIndex = (unsigned int) floorf(colIndex/NREGIONS);
+    assert(regionRowIndex < NREGIONS && regionColIndex < NREGIONS && "set_state_for_peers_of_index(): Region indices out of range");
+    const unsigned int start = regionRowIndex*NREGIONS*NCOLS + regionColIndex*NREGIONS;
+    for (unsigned int row = 0; row < NREGIONS; ++row)
     {
-        for (uint col = 0; col < NREGIONS; ++col)
+        for (unsigned int col = 0; col < NREGIONS; ++col)
         {
-            const uint currentIndex = start + row*NCOLS + col;
+            const unsigned int currentIndex = start + row*NCOLS + col;
             if (currentIndex == index) {
                 continue;
             }
-            puzzle->board[currentIndex].state = state;
+            puzzle->m_board[currentIndex].m_state = state;
         }
     }
 }
 
-// -----------------------------------------------------------------------------
+//
 // Interface
-// -----------------------------------------------------------------------------
+//
 
-SudokuPuzzle * sudoku_alloc_puzzle()
+//! \brief Allocate memory for a puzzle
+//!
+//! The memory is not initialized. Don't forget to de-allocate the memory with
+//! sudoku_dealloc_puzzle().
+
+struct SudokuPuzzle * sudoku_alloc_puzzle()
 {
-    SudokuPuzzle * ptr = (SudokuPuzzle*) malloc(sizeof(SudokuPuzzle));
-    memset(ptr, 0, sizeof(SudokuPuzzle));
-    ptr->board = (SudokuCellContent*) malloc(sizeof(SudokuCellContent)*NCOLS*NROWS);
-    memset(ptr->board, 0, sizeof(SudokuCellContent)*NCOLS*NROWS);
+    struct SudokuPuzzle * ptr = (struct SudokuPuzzle*) malloc(sizeof(struct SudokuPuzzle));
+    ptr->m_board = (struct SudokuCellContent*) malloc(sizeof(struct SudokuCellContent)*NCOLS*NROWS);
     return ptr;
 }
 
-void sudoku_dealloc_puzzle(SudokuPuzzle *puzzle)
+//! \brief De-allocate the memory for the given puzzle
+
+void sudoku_dealloc_puzzle(struct SudokuPuzzle *puzzle)
 {
     if (NULL != puzzle)
     {
-        free(puzzle->board);
+        free(puzzle->m_board);
     }
     free(puzzle);
 }
 
-void sudoku_clear_puzzle(SudokuPuzzle *puzzle)
+//! \brief Clear the given puzzle
+
+void sudoku_clear_puzzle(struct SudokuPuzzle *puzzle)
 {
     assert(NULL != puzzle && "sudoku_clear_puzzle(): Bad input");
-    memset(puzzle->board, 0, sizeof(SudokuCellContent)*NCOLS*NROWS);
-    for (uint i = 0; i < NROWS*NCOLS; ++i)
+    memset(puzzle->m_board, 0, sizeof(struct SudokuCellContent)*NCOLS*NROWS);
+    for (unsigned int i = 0; i < NROWS*NCOLS; ++i)
     {
-        puzzle->board[i].index = i;
+        puzzle->m_board[i].m_index = i;
     }
-    puzzle->selectedCellIndex = NO_CELL_SELECTED;
-    puzzle->selectionMode = SELECTION_MODE_ONE_BY_ONE;
-    puzzle->currentNumber = NO_CELL_SELECTED;
-    puzzle->isFinished = false;
+    puzzle->m_selectedCellIndex = NO_CELL_SELECTED;
+    puzzle->m_selectionMode = SELECTION_MODE_ONE_BY_ONE;
+    puzzle->m_currentNumber = NO_CELL_SELECTED;
+    puzzle->m_isFinished = false;
 }
 
-SudokuCellContent * sudoku_cell_content_at_index(SudokuPuzzle *puzzle, uint index)
+//! \brief Get the cell structure at the given index
+
+struct SudokuCellContent * sudoku_cell_content_at_index(struct SudokuPuzzle *puzzle, unsigned int index)
 {
     assert(NULL != puzzle && index < NROWS*NCOLS && "SudokuCellContentAtIndex(): Bad input");
-    return &(puzzle->board[index]);
+    return &(puzzle->m_board[index]);
 }
 
-void sudoku_generate_puzzle(SudokuPuzzle *puzzle)
+//! \brief Generate a puzzle
+
+void sudoku_generate_puzzle(struct SudokuPuzzle *puzzle)
 {
     assert(NULL != puzzle && "sudoku_generate_puzzle(): Bad input");
     sudoku_clear_puzzle(puzzle);
     sudoku_generate_solution(puzzle);
     sudoku_make_holes(puzzle, 10);
-    for (uint i = 0; i < NROWS*NCOLS; ++i)
+    for (unsigned int i = 0; i < NROWS*NCOLS; ++i)
     {
-        if (0 != puzzle->board[i].value)
+        if (0 != puzzle->m_board[i].m_value)
         {
-            puzzle->board[i].type = CELL_TYPE_INITIAL;
+            puzzle->m_board[i].m_type = CELL_TYPE_INITIAL;
         }
         else
         {
-            puzzle->board[i].type = CELL_TYPE_EMPTY;
+            puzzle->m_board[i].m_type = CELL_TYPE_EMPTY;
         }
-        puzzle->board[i].state = CELL_STATE_NONE;
+        puzzle->m_board[i].m_state = CELL_STATE_NONE;
     }
 }
 
-/**
- Save the puzzle to the given text file compatible with http://www.sudoku-solutions.com/
- All numbers are saved in one line, without space.
- */
-bool sudoku_save_to_file(SudokuPuzzle *puzzle, const char *filename)
+//! \brief Save the puzzle to the given text file
+//!
+//! The file is compatible with http://www.sudoku-solutions.com/ (useful to test
+//! solutions).
+
+bool sudoku_save_to_file(struct SudokuPuzzle *puzzle, const char *filename)
 {
     assert(NULL != puzzle && "SudokuSaveToFile(): Bad input");
     printf("Saving solution to file '%s'\n", filename);
@@ -146,55 +160,61 @@ bool sudoku_save_to_file(SudokuPuzzle *puzzle, const char *filename)
         perror("SudokuSaveToFile(): Can't open file");
         return false;
     }
-    for (uint i = 0; i < NROWS*NCOLS; ++i)
+    for (unsigned int i = 0; i < NROWS*NCOLS; ++i)
     {
-        fprintf(f, "%d", puzzle->board[i].value);
+        fprintf(f, "%d", puzzle->m_board[i].m_value);
     }
     fclose(f);
     return true;
 }
 
-// -----------------------------------------------------------------------------
+//
 // Callbacks for user interface
-// -----------------------------------------------------------------------------
+//
 
-void sudoku_on_number_clicked(struct SudokuPuzzle *puzzle, uint number)
+//! \brief Callback when selecting a number in the menu
+
+void sudoku_on_number_clicked(struct SudokuPuzzle *puzzle, unsigned int number)
 {
     assert(NULL != puzzle && IN_RANGE(number,1,9) && "sudoku_on_number_clicked(): Bad input");
-    puzzle->currentNumber = number;
-    if (SELECTION_MODE_ONE_BY_ONE == puzzle->selectionMode &&
-        NO_CELL_SELECTED != puzzle->selectedCellIndex &&
-        CELL_TYPE_INITIAL != CURRENT_CELL(puzzle).type)
+    puzzle->m_currentNumber = number;
+    if (SELECTION_MODE_ONE_BY_ONE == puzzle->m_selectionMode &&
+        NO_CELL_SELECTED != puzzle->m_selectedCellIndex &&
+        CELL_TYPE_INITIAL != CURRENT_CELL(puzzle).m_type)
     {
-        CURRENT_CELL(puzzle).value = number;
+        CURRENT_CELL(puzzle).m_value = number;
         sudoku_check_if_valid_and_finished(puzzle);
     }
 }
 
-void sudoku_on_cell_clicked(struct SudokuPuzzle *puzzle, uint index)
+//! \brief Callback when selecting a cell in the grid
+
+void sudoku_on_cell_clicked(struct SudokuPuzzle *puzzle, unsigned int index)
 {
     assert(NULL != puzzle && index < NROWS*NCOLS && "sudoku_on_cell_clicked(): Bad input");
     // Unselect previous cell
-    if (NO_CELL_SELECTED != puzzle->selectedCellIndex)
+    if (NO_CELL_SELECTED != puzzle->m_selectedCellIndex)
     {
-        CURRENT_CELL(puzzle).state = CELL_STATE_NONE;
-        SetStateForPeersOfIndex(puzzle, puzzle->selectedCellIndex, CELL_STATE_NONE);
+        CURRENT_CELL(puzzle).m_state = CELL_STATE_NONE;
+        set_state_for_peers_of_index(puzzle, puzzle->m_selectedCellIndex, CELL_STATE_NONE);
     }
     // Select new one
-    puzzle->selectedCellIndex = index;
-    CURRENT_CELL(puzzle).state = CELL_STATE_SELECTED;
-    SetStateForPeersOfIndex(puzzle, puzzle->selectedCellIndex, CELL_STATE_PEER);
+    puzzle->m_selectedCellIndex = index;
+    CURRENT_CELL(puzzle).m_state = CELL_STATE_SELECTED;
+    set_state_for_peers_of_index(puzzle, puzzle->m_selectedCellIndex, CELL_STATE_PEER);
 }
 
-void sudoku_on_eraser_clicked(SudokuPuzzle *puzzle)
+//! \brief Callback when selecting the eraser in the menu
+
+void sudoku_on_eraser_clicked(struct SudokuPuzzle *puzzle)
 {
     assert(NULL != puzzle && "sudoku_on_eraser_clicked(): Bad input");
-    puzzle->currentNumber = ERASER_SELECTED;
-    if (SELECTION_MODE_ONE_BY_ONE == puzzle->selectionMode &&
-        NO_CELL_SELECTED != puzzle->selectedCellIndex &&
-        CELL_TYPE_INITIAL != CURRENT_CELL(puzzle).type)
+    puzzle->m_currentNumber = ERASER_SELECTED;
+    if (SELECTION_MODE_ONE_BY_ONE == puzzle->m_selectionMode &&
+        NO_CELL_SELECTED != puzzle->m_selectedCellIndex &&
+        CELL_TYPE_INITIAL != CURRENT_CELL(puzzle).m_type)
     {
-        CURRENT_CELL(puzzle).value = 0;
+        CURRENT_CELL(puzzle).m_value = 0;
         sudoku_check_if_valid_and_finished(puzzle);
     }
 }

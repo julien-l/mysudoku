@@ -17,7 +17,7 @@
 
 @implementation ViewController
 {
-    SudokuPuzzle *thePuzzle;
+    struct SudokuPuzzle *thePuzzle;
 }
 
 - (void)viewDidLoad {
@@ -40,7 +40,7 @@
 // protocol -->
 //
 
-- (SudokuCellContent*)cellContentAtIndex:(uint)index {
+- (struct SudokuCellContent*)cellContentAtIndex:(uint)index {
     return sudoku_cell_content_at_index(thePuzzle, index);
 }
 
@@ -85,7 +85,7 @@
 - (void)onPuzzleUpdated
 {
     [_theGrid updateContent];
-    if (thePuzzle->isFinished)
+    if (thePuzzle->m_isFinished)
     {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Puzzle complete"
             message:@""
