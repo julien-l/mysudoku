@@ -13,7 +13,7 @@
 struct SudokuPuzzle;
 
 void sudoku_generate_solution(struct SudokuPuzzle *puzzle);
-void sudoku_make_holes(struct SudokuPuzzle *puzzle, uint n);
+void sudoku_make_holes(struct SudokuPuzzle *puzzle, unsigned int n);
 void sudoku_check_if_valid_and_finished(struct SudokuPuzzle *puzzle);
 
 #endif /* defined(__MySudoku__SudokuAlgorithms__) */

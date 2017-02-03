@@ -12,7 +12,7 @@
 @interface Theme : NSObject
 
 + (UIColor*)textColor;
-+ (uint)cellBorderWidth;
++ (unsigned int)cellBorderWidth;
 + (UIColor*)cellBorderColor;
 
 // Colors according to cell types

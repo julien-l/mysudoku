@@ -158,7 +158,7 @@ bool sudoku_save_to_file(struct SudokuPuzzle *puzzle, const char *filename)
     FILE *f = fopen(filename, "w");
     if (NULL == f)
     {
-        perror("SudokuSaveToFile(): Can't open file");
+        perror("sudoku_save_to_file(): Can't open file");
         return false;
     }
     for (unsigned int i = 0; i < NROWS*NCOLS; ++i)

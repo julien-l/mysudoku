@@ -40,11 +40,11 @@
 // protocol -->
 //
 
-- (struct SudokuCellContent*)cellContentAtIndex:(uint)index {
+- (struct SudokuCellContent*)cellContentAtIndex:(unsigned int)index {
     return sudoku_cell_content_at_index(thePuzzle, index);
 }
 
-- (void)setSelectedCellAtIndex:(uint)index {
+- (void)setSelectedCellAtIndex:(unsigned int)index {
     sudoku_on_cell_clicked(thePuzzle, index);
     [self onPuzzleUpdated];
 }

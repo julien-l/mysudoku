@@ -69,7 +69,7 @@ struct SudokuPuzzle
 struct SudokuPuzzle * sudoku_alloc_puzzle();
 void sudoku_dealloc_puzzle(struct SudokuPuzzle *puzzle);
 void sudoku_clear_puzzle(struct SudokuPuzzle *puzzle);
-struct SudokuCellContent * sudoku_cell_content_at_index(struct SudokuPuzzle *puzzle, uint index);
+struct SudokuCellContent * sudoku_cell_content_at_index(struct SudokuPuzzle *puzzle, unsigned int index);
 void sudoku_generate_puzzle(struct SudokuPuzzle *puzzle);
 bool sudoku_save_to_file(struct SudokuPuzzle *puzzle, const char *filename);
 
@@ -77,8 +77,8 @@ bool sudoku_save_to_file(struct SudokuPuzzle *puzzle, const char *filename);
 // Callbacks for user interface
 //
 
-void sudoku_on_cell_clicked(struct SudokuPuzzle *puzzle, uint index);
-void sudoku_on_number_clicked(struct SudokuPuzzle *puzzle, uint number);
+void sudoku_on_cell_clicked(struct SudokuPuzzle *puzzle, unsigned int index);
+void sudoku_on_number_clicked(struct SudokuPuzzle *puzzle, unsigned int number);
 void sudoku_on_eraser_clicked(struct SudokuPuzzle *puzzle);
 void sudoku_on_mode_changed(struct SudokuPuzzle *puzzle, enum SudokuSelectionMode mode);
 

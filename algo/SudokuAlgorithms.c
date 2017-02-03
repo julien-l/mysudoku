@@ -77,7 +77,7 @@ unsigned int get_random_number_from_candidate_list_and_remove_it(CandidateListTy
         }
     }
     assert(0 <= candidate && candidate < NCOLS && 0 == randomIndex && "get_random_number_from_candidate_list_and_remove_it(): Bad index");
-    
+
     // 4. remove it from the candidate list
     BIT_CLEAR(list[index],candidate);
 
@@ -168,7 +168,7 @@ void sudoku_generate_solution(struct SudokuPuzzle *puzzle)
     {
         BIT_REFILL_CANDIDATES(candidateList[i]);
     }
-    
+
     // TODO add a fixed counter corresponding to the worst case scenario (we try
     // all possibilities for each cell) so that we have a hard iteration limit
     for (unsigned int i = 0; i < NROWS*NCOLS;)

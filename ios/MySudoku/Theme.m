@@ -14,7 +14,7 @@
     return [UIColor darkGrayColor];
 }
 
-+ (uint)cellBorderWidth {
++ (unsigned int)cellBorderWidth {
     return 1;
 }
 
