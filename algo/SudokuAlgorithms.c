@@ -27,6 +27,27 @@ typedef int CandidateListType;
 #define NROWS       9
 #define NREGIONS    3
 
+#ifdef __linux__
+
+// The algorithm uses the arc4random() function which is not provided by default
+// on Linux system. When on Linux, provide a random number function with the
+// same name. The algorithm is not same so the name is incorrect but that's ok.
+
+#include <time.h>       // time() to seed the random number generator
+
+unsigned int arc4random()
+{
+    static bool is_init = false;
+    if (!is_init)
+    {
+        srandom(time(NULL));
+        is_init = true;
+    }
+    return (unsigned int) random();
+}
+
+#endif // __linux__
+
 //
 // Local functions processing intermediate data
 //
