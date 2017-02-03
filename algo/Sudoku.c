@@ -21,7 +21,8 @@
 #define NREGIONS    3
 
 #define NO_CELL_SELECTED    81
-#define ERASER_SELECTED     82
+#define ERASER_SELECTED     0   // zero corresponds to an empty cell: assign the eraser to the cell to clear it
+#define NO_NUMBER_SELECTED  81
 
 // Helper macros
 #define CURRENT_CELL(p)         p->m_board[p->m_selectedCellIndex]
@@ -111,7 +112,7 @@ void sudoku_clear_puzzle(struct SudokuPuzzle *puzzle)
     }
     puzzle->m_selectedCellIndex = NO_CELL_SELECTED;
     puzzle->m_selectionMode = SELECTION_MODE_ONE_BY_ONE;
-    puzzle->m_currentNumber = NO_CELL_SELECTED;
+    puzzle->m_currentNumber = NO_NUMBER_SELECTED;
     puzzle->m_isFinished = false;
 }
 
@@ -176,11 +177,11 @@ bool sudoku_save_to_file(struct SudokuPuzzle *puzzle, const char *filename)
 
 void sudoku_on_number_clicked(struct SudokuPuzzle *puzzle, unsigned int number)
 {
-    assert(NULL != puzzle && IN_RANGE(number,1,9) && "sudoku_on_number_clicked(): Bad input");
+    assert(NULL != puzzle && "sudoku_on_number_clicked(): Bad input");
     puzzle->m_currentNumber = number;
     if (SELECTION_MODE_ONE_BY_ONE == puzzle->m_selectionMode &&
-        NO_CELL_SELECTED != puzzle->m_selectedCellIndex &&
-        CELL_TYPE_INITIAL != CURRENT_CELL(puzzle).m_type)
+        CELL_TYPE_EMPTY == CURRENT_CELL(puzzle).m_type &&
+        NO_CELL_SELECTED != puzzle->m_selectedCellIndex)
     {
         CURRENT_CELL(puzzle).m_value = number;
         sudoku_check_if_valid_and_finished(puzzle);
@@ -202,19 +203,26 @@ void sudoku_on_cell_clicked(struct SudokuPuzzle *puzzle, unsigned int index)
     puzzle->m_selectedCellIndex = index;
     CURRENT_CELL(puzzle).m_state = CELL_STATE_SELECTED;
     set_state_for_peers_of_index(puzzle, puzzle->m_selectedCellIndex, CELL_STATE_PEER);
+    if (SELECTION_MODE_SEQUENCE == puzzle->m_selectionMode &&
+        CELL_TYPE_EMPTY == CURRENT_CELL(puzzle).m_type &&
+        NO_NUMBER_SELECTED != puzzle->m_currentNumber)
+    {
+        CURRENT_CELL(puzzle).m_value = puzzle->m_currentNumber;
+        sudoku_check_if_valid_and_finished(puzzle);
+    }
 }
 
 //! \brief Callback when selecting the eraser in the menu
 
 void sudoku_on_eraser_clicked(struct SudokuPuzzle *puzzle)
 {
-    assert(NULL != puzzle && "sudoku_on_eraser_clicked(): Bad input");
-    puzzle->m_currentNumber = ERASER_SELECTED;
-    if (SELECTION_MODE_ONE_BY_ONE == puzzle->m_selectionMode &&
-        NO_CELL_SELECTED != puzzle->m_selectedCellIndex &&
-        CELL_TYPE_INITIAL != CURRENT_CELL(puzzle).m_type)
-    {
-        CURRENT_CELL(puzzle).m_value = 0;
-        sudoku_check_if_valid_and_finished(puzzle);
-    }
+    sudoku_on_number_clicked(puzzle, ERASER_SELECTED);
+}
+
+//! \brief Callback when selecting the mode in the menu
+
+void sudoku_on_mode_changed(struct SudokuPuzzle *puzzle, enum SudokuSelectionMode mode)
+{
+    assert(NULL != puzzle && "sudoku_on_mode_changed(): Bad input");
+    puzzle->m_selectionMode = mode;
 }

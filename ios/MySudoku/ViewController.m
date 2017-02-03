@@ -72,8 +72,7 @@
 }
 
 - (IBAction)onNumberClicked:(UIButton *)sender {
-    const uint num = [[sender currentTitle] intValue];
-    sudoku_on_number_clicked(thePuzzle, num);
+    sudoku_on_number_clicked(thePuzzle, [[sender currentTitle] intValue]);
     [self onPuzzleUpdated];
 }
 
@@ -82,9 +81,18 @@
     [self onPuzzleUpdated];
 }
 
+- (IBAction)onModeClicked:(UISegmentedControl *)sender
+{
+    sudoku_on_mode_changed(thePuzzle, [sender selectedSegmentIndex] == 0 ?
+        SELECTION_MODE_ONE_BY_ONE :
+        SELECTION_MODE_SEQUENCE);
+    [self onPuzzleUpdated];
+}
+
 - (void)onPuzzleUpdated
 {
     [_theGrid updateContent];
+    //! \todo update state of control buttons
     if (thePuzzle->m_isFinished)
     {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Puzzle complete"

@@ -80,5 +80,6 @@ bool sudoku_save_to_file(struct SudokuPuzzle *puzzle, const char *filename);
 void sudoku_on_cell_clicked(struct SudokuPuzzle *puzzle, uint index);
 void sudoku_on_number_clicked(struct SudokuPuzzle *puzzle, uint number);
 void sudoku_on_eraser_clicked(struct SudokuPuzzle *puzzle);
+void sudoku_on_mode_changed(struct SudokuPuzzle *puzzle, enum SudokuSelectionMode mode);
 
 #endif /* defined(__MySudoku__Sudoku__) */
